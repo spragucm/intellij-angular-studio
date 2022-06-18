@@ -39,3 +39,15 @@ To keep everything working, do not remove `<!-- ... -->` sections.
 Plugin based on the [IntelliJ Platform Plugin Template][template].
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
+
+Just some notes while developing this plugin:
+  How to create a new Plugin for IntelliJ
+   1. Use github template  
+   2. Open in IntelliJ
+   3. Select "Run Plugin" configuration from toolbar
+  
+  IDE Extension via extension points:
+  https://plugins.jetbrains.com/docs/intellij/extension-point-list.html
+  https://jb.gg/ipe
+
+
