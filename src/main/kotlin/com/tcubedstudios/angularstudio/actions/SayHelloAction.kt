@@ -8,16 +8,16 @@ import com.intellij.notification.NotificationType
 class SayHelloAction: AnAction() {
 
     companion object {
-        val GROUP_ID = "SayHelloAction"
+//        val GROUP_ID = "SayHelloAction"
     }
 
     override fun actionPerformed(event: AnActionEvent) {
-        val project = event.project ?: return
-        NotificationTool.notify(project, GROUP_ID, "Hello", NotificationType.INFORMATION)
+//        val project = event.project ?: return
+//        NotificationTool.notify(project, GROUP_ID, "Hello", NotificationType.INFORMATION)
 
     }
 
     override fun update(event: AnActionEvent) {
-        event.presentation.isVisible = true
+//        event.presentation.isVisible = true
     }
 }

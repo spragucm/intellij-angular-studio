@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.tcubedstudios.angularstudio</id>
-    <name>Angular Studio Plugin for IntelliJ</name>
+    <name>Angular Studio</name>
     <vendor>tCubed Studios</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -17,7 +17,14 @@
     </applicationListeners>
 
     <actions>
-        <action id="com.tcubedstudios.angularstudio.actions.SayHelloAction"
+        <action id="com.tcubedstudios.angularstudio.actions.OpenInTerminal"
+                class="com.tcubedstudios.angularstudio.actions.OpenSelectedDirectoryAction"
+                text="Open in External Terminal"
+                description="Open current file location in external terminal">
+                <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.actions.SayHello"
                 class="com.tcubedstudios.angularstudio.actions.SayHelloAction"
                 text="Say Hello"
                 description="Just say hello">
