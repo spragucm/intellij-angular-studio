@@ -1,4 +1,4 @@
-package com.github.spragucm.intellijangularstudio
+package com.tcubedstudios.angularstudio
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

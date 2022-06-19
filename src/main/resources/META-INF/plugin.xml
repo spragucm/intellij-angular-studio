@@ -1,18 +1,18 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.spragucm.intellijangularstudio</id>
-    <name>intellij-angular-studio</name>
-    <vendor>spragucm</vendor>
+    <id>com.tcubedstudios.angularstudio</id>
+    <name>Angular Studio Plugin for IntelliJ</name>
+    <vendor>tCubed Studios</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.spragucm.intellijangularstudio.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.spragucm.intellijangularstudio.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.tcubedstudios.angularstudio.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.spragucm.intellijangularstudio.listeners.MyProjectManagerListener"
+        <listener class="com.tcubedstudios.angularstudio.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 

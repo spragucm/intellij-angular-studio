@@ -1,7 +1,7 @@
-package com.github.spragucm.intellijangularstudio.services
+package com.tcubedstudios.angularstudio.services
 
 import com.intellij.openapi.project.Project
-import com.github.spragucm.intellijangularstudio.MyBundle
+import com.tcubedstudios.angularstudio.MyBundle
 
 class MyProjectService(project: Project) {
 

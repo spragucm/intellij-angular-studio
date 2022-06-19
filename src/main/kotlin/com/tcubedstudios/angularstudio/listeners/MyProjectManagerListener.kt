@@ -1,9 +1,9 @@
-package com.github.spragucm.intellijangularstudio.listeners
+package com.tcubedstudios.angularstudio.listeners
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
-import com.github.spragucm.intellijangularstudio.services.MyProjectService
+import com.tcubedstudios.angularstudio.services.MyProjectService
 
 internal class MyProjectManagerListener : ProjectManagerListener {
 

@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# intellij-angular-studio Changelog
+# Angular Studio Plugin for IntelliJ Changelog
 
 ## [Unreleased]
 ### Added

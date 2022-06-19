@@ -1,1 +1,1 @@
-rootProject.name = "intellij-angular-studio"
+rootProject.name = "angular-studio-plugin-for-intellij"
