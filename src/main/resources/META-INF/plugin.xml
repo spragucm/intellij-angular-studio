@@ -16,4 +16,13 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
+    <actions>
+        <action id="com.tcubedstudios.angularstudio.actions.SayHelloAction"
+                class="com.tcubedstudios.angularstudio.actions.SayHelloAction"
+                text="Say Hello"
+                description="Just say hello">
+            <add-to-group group-id="RevealGroup" anchor="after" relative-to-action="RevealIn"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt A"/>
+        </action>
+    </actions>
 </idea-plugin>
