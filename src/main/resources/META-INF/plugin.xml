@@ -21,7 +21,7 @@
                 class="com.tcubedstudios.angularstudio.terminal.actions.OpenSelectedDirectoryAction"
                 text="Open in External Terminal"
                 description="Open current file location in external terminal"
-                icon="Icons.TERMINAL_ICON">
+                icon="/icons/terminal.png">
             <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
             <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
                 <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
