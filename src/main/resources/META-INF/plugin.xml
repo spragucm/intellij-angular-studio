@@ -9,6 +9,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.PluginSettings"/>
     </extensions>
 
     <applicationListeners>

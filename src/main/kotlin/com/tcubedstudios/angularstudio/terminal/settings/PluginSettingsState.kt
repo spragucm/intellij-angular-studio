@@ -7,8 +7,8 @@ class PluginSettingsState {
     var favoriteTerminal: String = ""
         get() {
             return when {
-                favoriteTerminal.isNotEmpty() -> field
-                else -> System.getenv("FAVORITE_TERMINAL")// to be compatible with old versions (prior to v0.2)
+                field.isNotEmpty() -> field
+                else -> System.getenv("FAVORITE_TERMINAL") ?: ""// to be compatible with old versions (prior to v0.2)
             }
         }
 
