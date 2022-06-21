@@ -7,9 +7,12 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable id="com.tcubedstudios.angularstudio.terminal.PluginSettings"
+                                instance="com.tcubedstudios.angularstudio.terminal.settings.PluginSettingsConfigurable"
+                                dynamic="true"/>
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.PluginSettings"/>
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.services.MyProjectService"/>
-        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.PluginSettings"/>
     </extensions>
 
     <applicationListeners>
@@ -18,6 +21,15 @@
     </applicationListeners>
 
     <actions>
+        <action id="com.tcubedstudios.angularstudio.terminal.actions.OpenTerminal"
+                class="com.tcubedstudios.angularstudio.terminal.actions.OpenProjectDirectoryAction"
+                text="Terminal"
+                description="Open the project directory in external terminal"
+                icon="/icons/terminal.png">
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
+        </action>
         <action id="com.tcubedstudios.angularstudio.terminal.actions.OpenInTerminal"
                 class="com.tcubedstudios.angularstudio.terminal.actions.OpenSelectedDirectoryAction"
                 text="Open in External Terminal"
@@ -26,6 +38,12 @@
             <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
             <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
                 <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.terminal.actions.SetAsDefaultDirectoryAction"
+                class="com.tcubedstudios.angularstudio.terminal.actions.SetAsDefaultDirectoryAction"
+                text="Set as Default Directory for External Terminal"
+                description="Set current directory location as the default path for external terminal">
+            <add-to-group group-id="RunContextPopupGroup" anchor="after" relative-to-action="com.tcubedstudios.angularstudio.terminal.actions.OpenInTerminal"/>
         </action>
 
         <action id="com.tcubedstudios.angularstudio.actions.SayHello"
