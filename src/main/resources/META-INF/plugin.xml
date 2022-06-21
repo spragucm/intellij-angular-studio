@@ -5,6 +5,7 @@
     <vendor>tCubed Studios</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="com.tcubedstudios.angularstudio.terminal.PluginSettings"
@@ -39,11 +40,19 @@
             <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
                 <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
         </action>
+        <action id="com.tcubedstudios.angularstudio.terminal.actions.OpenInLocalTerminal"
+                class="com.tcubedstudios.angularstudio.terminal.actions.RunCommandInLocalTerminalAction"
+                text="Open in Local Terminal"
+                description="Open in local terminal">
+            <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
+            <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
+            <add-to-group group-id="RunContextPopupGroup" anchor="after" relative-to-action="Terminal.OpenInTerminal"/>
+        </action>
         <action id="com.tcubedstudios.angularstudio.terminal.actions.SetAsDefaultDirectoryAction"
                 class="com.tcubedstudios.angularstudio.terminal.actions.SetAsDefaultDirectoryAction"
                 text="Set as Default Directory for External Terminal"
                 description="Set current directory location as the default path for external terminal">
-            <add-to-group group-id="RunContextPopupGroup" anchor="after" relative-to-action="com.tcubedstudios.angularstudio.terminal.actions.OpenInTerminal"/>
+            <add-to-group group-id="RunContextPopupGroup" anchor="last"/>
         </action>
 
         <action id="com.tcubedstudios.angularstudio.actions.SayHello"
