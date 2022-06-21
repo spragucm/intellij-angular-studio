@@ -17,10 +17,13 @@
     </applicationListeners>
 
     <actions>
-        <action id="com.tcubedstudios.angularstudio.actions.OpenInTerminal"
-                class="com.tcubedstudios.angularstudio.actions.OpenSelectedDirectoryAction"
+        <action id="com.tcubedstudios.angularstudio.terminal.actions.OpenInTerminal"
+                class="com.tcubedstudios.angularstudio.terminal.actions.OpenSelectedDirectoryAction"
                 text="Open in External Terminal"
-                description="Open current file location in external terminal">
+                description="Open current file location in external terminal"
+                icon="Icons.TERMINAL_ICON">
+            <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
+            <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
                 <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
         </action>
 
