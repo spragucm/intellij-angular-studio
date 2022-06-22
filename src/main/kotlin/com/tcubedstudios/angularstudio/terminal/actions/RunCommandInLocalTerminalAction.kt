@@ -35,11 +35,13 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
                     val window = ToolWindowManager.getInstance(project).getToolWindow(TerminalToolWindowFactory.TOOL_WINDOW_ID)
 
                     val contentManager = window?.contentManager
+                    val terminalWorkingDirectory = "I:\\Google Drive (HoverDroids)\\Code\\Windows\\Scripts"//project.basePath
                     val widget = when (val content = contentManager?.findContent(TAB_NAME)) {
-                        null -> terminalView.createLocalShellWidget(project.basePath, TAB_NAME)
+                        null -> terminalView.createLocalShellWidget(terminalWorkingDirectory, TAB_NAME)
                         else -> TerminalView.getWidgetByContent(content) as ShellTerminalWidget
                     }
-                    widget.executeCommand("ng help")
+                    val cmd =  "& \".\\Angular\\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1\" -skipInstall true"
+                    widget.executeCommand(cmd)
 
                 } catch (e: IOException) {
                     LOGGY.error("Cannot run command in local terminal. Error:$e")
