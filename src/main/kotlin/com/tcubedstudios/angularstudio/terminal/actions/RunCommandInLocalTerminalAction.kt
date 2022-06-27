@@ -1,21 +1,17 @@
 package com.tcubedstudios.angularstudio.terminal.actions
 
-import com.google.common.io.Files
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.PluginId
-import com.intellij.openapi.fileTypes.FileType
-import com.intellij.openapi.fileTypes.FileTypeManager
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.wm.ToolWindowManager
 import com.tcubedstudios.angularstudio.terminal.utils.getEventProject
+import com.tcubedstudios.angularstudio.util.FileUtils
 import org.jetbrains.plugins.terminal.ShellTerminalWidget
 import org.jetbrains.plugins.terminal.TerminalToolWindowFactory
 import org.jetbrains.plugins.terminal.TerminalView
 import java.io.IOException
-import java.io.File
-import com.intellij.platform.templates.ArchivedTemplatesFactory
 
 // https://intellij-support.jetbrains.com/hc/en-us/community/posts/360005329339-Execute-command-in-the-terminal-from-plugin-action?page=1#community_comment_6186561275794
 // https://github.com/JetBrains/intellij-community/blob/95ab6a1ecfdf49754f7eb5a81984cdc2c4fa0ca5/plugins/sh/src/com/intellij/sh/run/ShTerminalRunner.java
@@ -35,10 +31,13 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
             null -> LOGGY.error("Cannot run command in local terminal. Project is null")
             else -> {
                 try {
-                    val file = File("/src/main/kotlin/com.tcubedstudios.angularstudio/scripts/DeleteMe.txt")///src/main/kotlin/com.tcubedstudios.angularstudio/scripts/DeleteMe.txt
+                    val fileInputStream = FileUtils.getFileInputStream("/scripts/DeleteMe.txt")
+                    println("file:$fileInputStream")
+
+                    //val file = File("/com/tcubedstudios/angularstudio/resources/DeleteMe.txt")///src/main/kotlin/com.tcubedstudios.angularstudio/scripts/DeleteMe.txt
 //                    val fileType: FileType = FileTypeManager.getInstance().getFileTypeByFileName("pom.xml")
-                    val content: String = Files.asCharSource(file, Charsets.UTF_8).read()
-                    println(content)
+                    //val content: String = Files.asCharSource(file, Charsets.UTF_8).read()
+                    //println(content)
 
 
 
