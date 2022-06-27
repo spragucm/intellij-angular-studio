@@ -1,0 +1,3 @@
+[submodule "src/main/resources/scripts"]
+	path = src/main/resources/scripts
+	url = https://tCubedStudios@dev.azure.com/tCubedStudios/Common/_git/scripts
