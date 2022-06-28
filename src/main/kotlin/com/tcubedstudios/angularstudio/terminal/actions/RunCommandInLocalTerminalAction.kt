@@ -39,10 +39,10 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
                     val jarFileUrl = FileUtils.getFileUrl(jarFilePath)
                     val jarFileInputStream = FileUtils.getFileInputStream(jarFilePath)
                     val tempFilePath = "$angularStudioTempDir$jarFilePath".replace("/","\\")
-                    FileUtils.copyFileFromJarToLocal(jarFilePath, tempFilePath)
-
+                    //FileUtils.copyFileFromJarToLocal(jarFilePath, tempFilePath)
+                    val scriptsDir = "$angularStudioTempDir\\scripts"
                     //C:\Users\sprag\AppData\Local\Temp\AngularStudio14122101997227355518\scripts\Angular\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1\Shared\Utils\CollectionsUtils.psm1
-                    FileUtils.copyFilesFromJarToLocal(jarStartingDirectoryPath, angularStudioTempDir)
+                    FileUtils.copyFilesFromJarToLocal(jarStartingDirectoryPath, scriptsDir)
 
                     //NEED TO use this file to put in temp, then reference temp in terminal
 
@@ -60,11 +60,13 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
 
                     val pluginPath = PluginManager.getPlugin(PluginId.getId("com.tcubedstudios.angularstudio"))?.path
                     val scriptsRootPath = "$pluginPath\\scripts" //"I:\\Google Drive (HoverDroids)\\Code\\Windows\\Scripts"
+
+
                     var scriptPath = tempFilePath//fileUrl?.path //"$scriptsRootPath\\Angular\\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
 
                     //scriptPath = "file:/I:/Google Drive (HoverDroids)/Code/WebStorm/intellij-angular-studio/build/idea-sandbox/plugins/angular-studio-plugin-for-intellij/lib/angular-studio-plugin-for-intellij-0.0.1.jar!/scripts/Angular/CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
 
-                    val scriptArguments = "-skipInstall true"
+                    val scriptArguments = "-scriptsDirectory $scriptsDir -skipInstall true"
 
                     val terminalView = TerminalView.getInstance(project)
                     val window = ToolWindowManager.getInstance(project).getToolWindow(TerminalToolWindowFactory.TOOL_WINDOW_ID)

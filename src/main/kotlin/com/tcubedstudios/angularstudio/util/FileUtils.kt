@@ -70,21 +70,6 @@ object FileUtils {
                 } catch(e: Exception) {
                     println("e:$e")
                 }
-
-
-                /*try {
-                    if (Files.isDirectory(from)) {
-                        if (Files.notExists(to)) {
-                            //log.trace("Creating directory {}", to)
-                            Files.createDirectories(to)
-                        }
-                    } else {
-                        //log.trace("Extracting file {} to {}", from, to)
-                        Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING)
-                    }
-                } catch (e: IOException) {
-                    throw RuntimeException("Failed to unzip file.", e)
-                }*/
             }
         }
     }
