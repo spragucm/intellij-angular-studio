@@ -1,17 +1,10 @@
 package com.tcubedstudios.angularstudio.util
 
-import java.io.File
-import java.io.InputStream
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-import java.net.URL
+import java.io.*
 import java.net.MalformedURLException
-import java.net.URI
-import java.nio.file.CopyOption
-import java.nio.file.FileSystems
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
-import java.nio.file.Path
+import java.net.URL
+import java.nio.file.*
+
 
 object FileUtils {
     fun getFileUrl(filePath: String): URL? {
@@ -58,6 +51,44 @@ object FileUtils {
             }
         }
     }
+
+    fun copyFilesFromJarToLocal(jarStartingDirectoryPath: String, localDirectoryPath: String) {
+        val jarFileUri = FileUtils.getFileUrl(jarStartingDirectoryPath)?.toURI()
+        val jarAsFileSystem = FileSystems.newFileSystem(jarFileUri, mapOf<String,String>())
+        val from = jarAsFileSystem.getPath("scripts")
+        val to = Paths.get(localDirectoryPath)
+        Files.walk(from).use { sources ->
+            sources.forEach { src ->
+                val destination: Path = to.resolve(from.relativize(src).toString())
+                try {
+                    val isDirectory = Files.isDirectory(destination)
+                    when {
+                        isDirectory && Files.notExists(destination) -> Files.createDirectories(destination)
+                        !isDirectory -> Files.copy(src, destination, StandardCopyOption.REPLACE_EXISTING)
+                        else -> {}
+                    }
+                } catch(e: Exception) {
+                    println("e:$e")
+                }
+
+
+                /*try {
+                    if (Files.isDirectory(from)) {
+                        if (Files.notExists(to)) {
+                            //log.trace("Creating directory {}", to)
+                            Files.createDirectories(to)
+                        }
+                    } else {
+                        //log.trace("Extracting file {} to {}", from, to)
+                        Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING)
+                    }
+                } catch (e: IOException) {
+                    throw RuntimeException("Failed to unzip file.", e)
+                }*/
+            }
+        }
+    }
+
     // TODO - Chris - Add more file utils from
     //https://stackoverflow.com/questions/10308221/how-to-copy-file-inside-jar-to-outside-the-jar/10308305#10308305
 //    fun getFileFromJar(jarFilePath: String) {

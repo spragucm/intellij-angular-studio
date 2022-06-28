@@ -34,13 +34,15 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
 
                     val angularStudioTempDir = FileUtils.createTempDirectory()
                     //val jarFilePath = "\\com\\tcubedstudios\\angularstudio\\resources\\scripts\\Angular\\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
+                    val jarStartingDirectoryPath = "/scripts"
                     val jarFilePath = "/scripts/Angular/CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
                     val jarFileUrl = FileUtils.getFileUrl(jarFilePath)
                     val jarFileInputStream = FileUtils.getFileInputStream(jarFilePath)
                     val tempFilePath = "$angularStudioTempDir$jarFilePath".replace("/","\\")
                     FileUtils.copyFileFromJarToLocal(jarFilePath, tempFilePath)
 
-
+                    //C:\Users\sprag\AppData\Local\Temp\AngularStudio14122101997227355518\scripts\Angular\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1\Shared\Utils\CollectionsUtils.psm1
+                    FileUtils.copyFilesFromJarToLocal(jarStartingDirectoryPath, angularStudioTempDir)
 
                     //NEED TO use this file to put in temp, then reference temp in terminal
 
