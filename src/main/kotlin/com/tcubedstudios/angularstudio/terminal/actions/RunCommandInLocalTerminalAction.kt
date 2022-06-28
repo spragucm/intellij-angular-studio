@@ -31,9 +31,15 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
             null -> LOGGY.error("Cannot run command in local terminal. Project is null")
             else -> {
                 try {
-                    val fileInputStream = FileUtils.getFileInputStream("/scripts/DeleteMe.txt")
+                    val path = "/scripts/Angular/CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
+                    val fileInputStream = FileUtils.getFileInputStream(path)
+                    fileInputStream
+                    //NEED TO use this file to put in temp, then reference temp in terminal
+
                     println("file:$fileInputStream")
 
+                    val fileUrl = FileUtils.getFileUrl(path)
+                    println("fileUrl:$fileUrl")
                     //val file = File("/com/tcubedstudios/angularstudio/resources/DeleteMe.txt")///src/main/kotlin/com.tcubedstudios.angularstudio/scripts/DeleteMe.txt
 //                    val fileType: FileType = FileTypeManager.getInstance().getFileTypeByFileName("pom.xml")
                     //val content: String = Files.asCharSource(file, Charsets.UTF_8).read()
@@ -44,7 +50,10 @@ class RunCommandInLocalTerminalAction: DumbAwareAction() {
 
                     val pluginPath = PluginManager.getPlugin(PluginId.getId("com.tcubedstudios.angularstudio"))?.path
                     val scriptsRootPath = "$pluginPath\\scripts" //"I:\\Google Drive (HoverDroids)\\Code\\Windows\\Scripts"
-                    val scriptPath = "$scriptsRootPath\\Angular\\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
+                    var scriptPath = fileUrl?.path //"$scriptsRootPath\\Angular\\CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
+
+                    scriptPath = "file:/I:/Google Drive (HoverDroids)/Code/WebStorm/intellij-angular-studio/build/idea-sandbox/plugins/angular-studio-plugin-for-intellij/lib/angular-studio-plugin-for-intellij-0.0.1.jar!/scripts/Angular/CreateWorkspaceWithMultipleProjectsAndLibraries.ps1"
+
                     val scriptArguments = "-skipInstall true"
 
                     val terminalView = TerminalView.getInstance(project)

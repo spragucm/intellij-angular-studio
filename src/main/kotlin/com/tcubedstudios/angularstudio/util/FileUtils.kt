@@ -7,6 +7,14 @@ import java.net.URL
 import java.net.MalformedURLException
 
 object FileUtils {
+    fun getFileUrl(filePath: String): URL? {
+        return try {
+            FileUtils.javaClass.getResource(filePath)
+        } catch(e: Exception) {
+            null
+        }
+    }
+
     fun getFileInputStream(filePath: String): InputStream? {
         try {
             //Check for http URL
