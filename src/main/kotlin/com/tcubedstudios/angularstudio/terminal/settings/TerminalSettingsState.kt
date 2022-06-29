@@ -2,7 +2,7 @@ package com.tcubedstudios.angularstudio.terminal.settings
 
 import java.util.*
 
-class PluginSettingsState {
+class TerminalSettingsState {
 
     var favoriteTerminal: String = ""
         get() {
@@ -13,7 +13,7 @@ class PluginSettingsState {
         }
 
     override fun equals(other: Any?) = when {
-        other is PluginSettingsState && favoriteTerminal == other.favoriteTerminal -> true
+        other is TerminalSettingsState && favoriteTerminal == other.favoriteTerminal -> true
         else -> false
     }
 

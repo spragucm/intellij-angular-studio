@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.util
+package com.tcubedstudios.angularstudio.shared.util
 
 import java.io.*
 import java.net.MalformedURLException
@@ -53,7 +53,7 @@ object FileUtils {
     }
 
     fun copyFilesFromJarToLocal(jarStartingDirectoryPath: String, localDirectoryPath: String) {
-        val jarFileUri = FileUtils.getFileUrl(jarStartingDirectoryPath)?.toURI()
+        val jarFileUri = getFileUrl(jarStartingDirectoryPath)?.toURI()
         val jarAsFileSystem = FileSystems.newFileSystem(jarFileUri, mapOf<String,String>())
         val from = jarAsFileSystem.getPath("scripts")
         val to = Paths.get(localDirectoryPath)

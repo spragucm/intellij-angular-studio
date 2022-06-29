@@ -1,9 +1,9 @@
-package com.tcubedstudios.angularstudio.listeners
+package com.tcubedstudios.angularstudio.needtosort.listeners
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
-import com.tcubedstudios.angularstudio.services.MyProjectService
+import com.tcubedstudios.angularstudio.needtosort.services.MyProjectService
 
 internal class MyProjectManagerListener : ProjectManagerListener {
 

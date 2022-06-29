@@ -1,9 +1,4 @@
-package com.tcubedstudios.angularstudio.util
-
-import com.tcubedstudios.angularstudio.actions.SayHelloAction
-import com.intellij.notification.*
-import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.project.Project
+package com.tcubedstudios.angularstudio.shared.util
 
 class NotificationTool {
 

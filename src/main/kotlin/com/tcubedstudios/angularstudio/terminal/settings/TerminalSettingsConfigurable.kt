@@ -13,7 +13,7 @@ import com.tcubedstudios.angularstudio.terminal.model.TerminalType.GENERIC
 import org.jdesktop.swingx.util.OS
 import javax.swing.JComponent
 
-class PluginSettingsConfigurable: Configurable {
+class TerminalSettingsConfigurable: Configurable {
 
     companion object {
         const val WARNING_MESSAGE = "The selected terminal currently is not supported and may not work properly"
@@ -23,8 +23,8 @@ class PluginSettingsConfigurable: Configurable {
     private val terminalChooserDescriptor: FileChooserDescriptor = FileChooserDescriptor(true, OS.isMacOSX(), false, false, false, false)
 
     private val project: Project
-    private val pluginSettingsForm: PluginSettingsForm = PluginSettingsForm()
-    private val pluginSettings: PluginSettings = PluginSettings.getInstance()
+    private val terminalSettingsForm: TerminalSettingsForm = TerminalSettingsForm()
+    private val terminalSettings: TerminalSettings = TerminalSettings.getInstance()
 
     private var selectedTerminal: VirtualFile? = null
 
@@ -34,12 +34,12 @@ class PluginSettingsConfigurable: Configurable {
         project = if (openProjects.isNotEmpty()) openProjects[0] else projectManager.defaultProject
 
         // FileChooserDialog support - longforus
-        val favoriteTerminal = pluginSettings.state.favoriteTerminal
+        val favoriteTerminal = terminalSettings.state.favoriteTerminal
         if (favoriteTerminal.isNotEmpty()) {
             selectedTerminal = VirtualFileManager.getInstance().findFileByUrl("file://$favoriteTerminal")
         }
 
-        pluginSettingsForm.terminalFileChooserButton?.addActionListener {
+        terminalSettingsForm.terminalFileChooserButton?.addActionListener {
             val chosenTerminals = FileChooserDialogImpl(terminalChooserDescriptor, project).choose(project, selectedTerminal)
             if (chosenTerminals.isNotEmpty()) {
                 chosenTerminals[0]?.let { file ->
@@ -51,24 +51,24 @@ class PluginSettingsConfigurable: Configurable {
                     }
 
                     selectedTerminal = file
-                    pluginSettingsForm.favoriteTerminalField?.text = canonicalPath
+                    terminalSettingsForm.favoriteTerminalField?.text = canonicalPath
                 }
             }
         }
     }
 
-    override fun getDisplayName(): String = "Native Terminal Plugin"
+    override fun getDisplayName(): String = "Angular Studio Terminal"
 
-    override fun getHelpTopic(): String = "Configure Native Terminal Plugin"
+    override fun getHelpTopic(): String = "Configure Angular Studio Terminal"
 
-    override fun createComponent(): JComponent? = pluginSettingsForm.settingsPanel
+    override fun createComponent(): JComponent? = terminalSettingsForm.settingsPanel
 
-    override fun isModified(): Boolean = pluginSettingsForm.pluginSettingsState != pluginSettings.state
+    override fun isModified(): Boolean = terminalSettingsForm.terminalSettingsState != terminalSettings.state
 
-    override fun apply()  = pluginSettings.loadState(pluginSettingsForm.pluginSettingsState)
+    override fun apply()  = terminalSettings.loadState(terminalSettingsForm.terminalSettingsState)
 
     override fun reset() {
-        pluginSettingsForm.pluginSettingsState = pluginSettings.state
+        terminalSettingsForm.terminalSettingsState = terminalSettings.state
     }
 
     override fun disposeUIResources() { }

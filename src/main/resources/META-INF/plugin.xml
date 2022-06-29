@@ -9,15 +9,15 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="com.tcubedstudios.angularstudio.terminal.PluginSettings"
-                                instance="com.tcubedstudios.angularstudio.terminal.settings.PluginSettingsConfigurable"
+                                instance="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettingsConfigurable"
                                 dynamic="true"/>
-        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.PluginSettings"/>
-        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.tcubedstudios.angularstudio.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings"/>
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>
+        <projectService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.tcubedstudios.angularstudio.listeners.MyProjectManagerListener"
+        <listener class="com.tcubedstudios.angularstudio.needtosort.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
@@ -53,14 +53,6 @@
                 text="Set as Default Directory for External Terminal"
                 description="Set current directory location as the default path for external terminal">
             <add-to-group group-id="RunContextPopupGroup" anchor="last"/>
-        </action>
-
-        <action id="com.tcubedstudios.angularstudio.actions.SayHello"
-                class="com.tcubedstudios.angularstudio.actions.SayHelloAction"
-                text="Say Hello"
-                description="Just say hello">
-            <add-to-group group-id="RevealGroup" anchor="after" relative-to-action="RevealIn"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="alt A"/>
         </action>
     </actions>
 </idea-plugin>
