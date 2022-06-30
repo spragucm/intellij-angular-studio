@@ -47,6 +47,6 @@ class NewWorkspaceSettingsForm {
     var workspacePath: JTextField? = null
     var workspacePathLabel: JLabel? = null
 
-    // TODO - CHRIS - why is this here?
-//    var newWorkspaceSettingsState: NewWorkspaceSettingsState = NewWorkspaceSettingsState()
+    // Update all fields at once using the save state object
+    var newWorkspaceSettingsState: NewWorkspaceSettingsState = NewWorkspaceSettingsState()
 }
