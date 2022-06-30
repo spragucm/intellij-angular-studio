@@ -10,12 +10,15 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings"
                                 instance="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettingsConfigurable"
-                                dynamic="true"/>
+                                dynamic="true"
+                                groupId="bla"
+        />
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings"/>
 
         <applicationConfigurable id="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings"
                                 instance="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettingsConfigurable"
-                                dynamic="true"/>
+                                dynamic="true"
+                                 groupId="bla"/>
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings"/>
 
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>

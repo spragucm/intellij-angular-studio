@@ -44,8 +44,9 @@ class NewWorkspaceSettingsForm {
     var checkBox12: JCheckBox? = null
     var comboBox2: JComboBox<*>? = null
     var comboBox3: JComboBox<*>? = null
-    var workspacePath: JTextField? = null
+    var workspacePathTextView: JTextField? = null
     var workspacePathLabel: JLabel? = null
+    var workspacePathButton: JButton? = null
 
     // Update all fields at once using the save state object
     var newWorkspaceSettingsState: NewWorkspaceSettingsState = NewWorkspaceSettingsState()
