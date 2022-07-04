@@ -1,15 +1,17 @@
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+val coroutinesVersion = "1.3.8"
+
 fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
     // Java support
     id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.6.10"
+    id("org.jetbrains.kotlin.jvm") version "1.7.0"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.4.0"
+    id("org.jetbrains.intellij") version "1.6.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
@@ -22,6 +24,13 @@ version = properties("pluginVersion")
 // Configure project's dependencies
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
+    implementation(kotlin("stdlib"))
+    implementation("javax.annotation:javax.annotation-api:1.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -48,6 +57,10 @@ qodana {
     showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
 tasks {
     // Set the JVM compatibility versions
     properties("javaVersion").let {
@@ -55,8 +68,14 @@ tasks {
             sourceCompatibility = it
             targetCompatibility = it
         }
+//      IntelliJ community uses @JvmDefault. Here's how to get it to work:
+//      https://stackoverflow.com/questions/53964192/jvmdefault-and-how-add-compiler-option
         withType<KotlinCompile> {
-            kotlinOptions.jvmTarget = it
+            kotlinOptions{
+                jvmTarget = "11"
+                // For creation of default methods in interfaces
+                freeCompilerArgs = listOf("-Xjvm-default=all")
+            }
         }
     }
 
