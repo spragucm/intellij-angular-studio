@@ -8,18 +8,31 @@
     <depends>org.jetbrains.plugins.terminal</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable id="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings"
+        <applicationConfigurable id="angularstudio.terminal"
                                 instance="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettingsConfigurable"
                                 dynamic="true"
-                                groupId="bla"
-        />
+                                bundle="messages.MyBundle"
+                                groupId="angularstudio.base"/>
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings"/>
 
-        <applicationConfigurable id="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings"
-                                instance="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettingsConfigurable"
-                                dynamic="true"
-                                 groupId="bla"/>
+        <applicationConfigurable id="angularstudio.newworkspace"
+                                 instance="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettingsConfigurable"
+                                 dynamic="true"
+                                 bundle="messages.MyBundle"
+                                 groupId="angularstudio.base"
+        />
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings"/>
+
+        <applicationConfigurable id="angularstudio.base"
+                                 instance="com.tcubedstudios.angularstudio.shared.settings.AngularStudioSettingsConfigurable"
+                                 bundle="messages.MyBundle"
+                                 groupId="tools"
+        />
+        <applicationConfigurable id="angularstudio.createworkspace"
+                                 instance="com.tcubedstudios.angularstudio.angular.settings.CreateWorkspaceSettingsConfigurable"
+                                 bundle="messages.MyBundle"
+                                 groupId="angularstudio.base"
+        />
 
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyProjectService"/>
