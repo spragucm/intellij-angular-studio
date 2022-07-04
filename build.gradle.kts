@@ -27,10 +27,10 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-    implementation(kotlin("stdlib"))
-    implementation("javax.annotation:javax.annotation-api:1.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+//    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
+//    implementation(kotlin("stdlib"))
+//    implementation("javax.annotation:javax.annotation-api:1.2")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -57,16 +57,12 @@ qodana {
     showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-}
-
 tasks {
     // Set the JVM compatibility versions
     properties("javaVersion").let {
         withType<JavaCompile> {
-            sourceCompatibility = it
-            targetCompatibility = it
+            sourceCompatibility = "1.8"
+            targetCompatibility = "1.8"
         }
 //      IntelliJ community uses @JvmDefault. Here's how to get it to work:
 //      https://stackoverflow.com/questions/53964192/jvmdefault-and-how-add-compiler-option
