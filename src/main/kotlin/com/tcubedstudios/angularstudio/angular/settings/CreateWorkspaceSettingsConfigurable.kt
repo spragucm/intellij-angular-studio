@@ -1,25 +1,19 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
 import javax.swing.JComponent
-import javax.swing.JPanel
-import com.intellij.diff.impl.DiffSettingsHolder.DiffSettings
-import com.intellij.diff.tools.util.base.TextDiffSettingsHolder
-import com.intellij.diff.tools.util.base.TextDiffSettingsHolder.TextDiffSettings
-import com.intellij.openapi.diff.DiffBundle.message
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.observable.properties.GraphProperty
-import com.intellij.openapi.observable.properties.GraphPropertyImpl
 import com.intellij.openapi.observable.properties.PropertyGraph
-import com.intellij.openapi.options.BoundSearchableConfigurable
-import com.intellij.openapi.ui.DialogPanel
+import com.intellij.openapi.observable.util.toUiPathProperty
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
+import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.dsl.builder.*
-import com.tcubedstudios.angularstudio.shared.intellijcompat.openapi.observable.properties.property
-import com.intellij.ui.dsl.builder.Cell
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
-import com.tcubedstudios.angularstudio.shared.intellijcompat.openapi.observable.util.toUiPathProperty
+import com.tcubedstudios.angularstudio.shared.util.checkBoxRow
+import com.tcubedstudios.angularstudio.shared.util.textRow
+import javax.swing.ComboBoxModel
+import javax.swing.DefaultComboBoxModel
 
 class CreateWorkspaceSettingsConfigurable: Configurable {
 
@@ -30,11 +24,15 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
 
     private val propertyGraph = PropertyGraph()
 
-    private val nameProperty = propertyGraph.property("Some name property")
-    private var projectName by nameProperty
+    private val workspaceNameProperty: GraphProperty<String> = propertyGraph.property("")
+    private var workspaceName: String by workspaceNameProperty
 
-    private val compilerOutputProperty = propertyGraph.property("")
-    private val projectCompilerOutput by compilerOutputProperty
+    private val workspaceTemplatePathProperty: GraphProperty<String> = propertyGraph.property("")
+    private var workspaceTemplatePath: String by workspaceTemplatePathProperty
+
+    private val workspacePathProperty: GraphProperty<String> = propertyGraph.property("c:/")
+    private var workspacePath: String by workspacePathProperty
+
 
     private var sourceRootPath: String = ""
     private lateinit var pathField: TextFieldWithBrowseButton
@@ -44,14 +42,18 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
     override fun getHelpTopic(): String = "Configure New Angular Workspace Settings"
 
     override fun createComponent(): JComponent? {
+        //TODO - CHRIS - should this include the idea of "use template", "if not in template, value is"
         return panel {
-            group("Required") {
-//                label("Workspace Path")
-                row("Workspace") {
-                    textField()
-                        .bindText(nameProperty)
-//                        .widthGroup(COLUMN1)
-                        .columns(28)
+            group {
+                textRow("Workspace Name")//.bindText(workspaceNameProperty)
+                checkBoxRow("Force")
+            }
+            collapsibleGroup("Standard Settings") {
+                row("Workspace Template") {
+                    comboBox(getWorkspaceTemplates(), SimpleListCellRenderer.create("") { it.first })
+                        .horizontalAlign(HorizontalAlign.FILL)
+                }
+                row("Workspace Path") {
                     textFieldWithBrowseButton(
                         null,
                         null,
@@ -59,22 +61,113 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
                         null
                     )
                         .horizontalAlign(HorizontalAlign.FILL)
-                        .bindText(compilerOutputProperty)//.toUiPathProperty()
+                        .bindText(workspacePathProperty.toUiPathProperty())
+//                        .onIsModified {
+//                            //TODO - CHRIS
+//                            return@onIsModified true
+//                        }
+//                        .widthGroup(COLUMN1)
 
                 }
-                row("Something in a row 2") {
-                    checkBox("Some check")
+                row("Workspace package.json Path") {
+                    comboBox(getPackageJsonTemplates(), SimpleListCellRenderer.create("") { it.first })
+                        .horizontalAlign(HorizontalAlign.FILL)
+                }
+                checkBoxRow("Replace entire package.json with template")
+                checkBoxRow("Create Worksapce InWorkingDirectory")
+                checkBoxRow("Is Mono Repo")
+                textRow("Prefix")
+                checkBoxRow("Routing")
+                checkBoxRow("Strict")
+                row("Style") {
+                    comboBox(getStyles(), SimpleListCellRenderer.create("scss") { it })
+                        .horizontalAlign(HorizontalAlign.FILL)
                 }
             }
-            collapsibleGroup("Another Group") {
-                row {
-                    label("Some Label")
-                        .bold()
-                        .comment("Let's see some comment")
-                    checkBox("Checkbox 3")
-                    checkBox("Checkbox 4")
-                }.bottomGap(BottomGap.SMALL)
+            collapsibleGroup("Advanced Settings") {
+                checkBoxRow("Inline Style")
+                checkBoxRow("Inline Template")
+                textRow("New ProjectRoot")
+                row("Package Manager") {
+                    comboBox(getPackageManagers(), SimpleListCellRenderer.create("npm") { it })
+                        .horizontalAlign(HorizontalAlign.FILL)
+                }
+                textRow("Directory Name")
+                checkBoxRow("Skip Git")
+                checkBoxRow("Skip Tests")
+                checkBoxRow("Clean Install")
             }
+            collapsibleGroup("Obscure Settings") {
+                checkBoxRow("Defaults")
+                checkBoxRow("Dry Run")
+                textRow("Collection")
+                checkBoxRow("Commit")
+                checkBoxRow("Interactive")
+                checkBoxRow("Minimal")
+                checkBoxRow("Skip Install")
+                checkBoxRow("Verbose")
+                row("View Encapsulation") {
+                    comboBox(getViewEncapsulations(), SimpleListCellRenderer.create("Emulated") { it })
+                        .horizontalAlign(HorizontalAlign.FILL)
+                }
+                checkBoxRow("Show Critical Dialogs")
+                checkBoxRow("Show Standard Dialogs")
+                checkBoxRow("Show Advanced Dialogs")
+                checkBoxRow("Show Obscure Dialogs")
+
+            }.bottomGap(BottomGap.SMALL)
+        }
+    }
+
+    private fun getWorkspaceTemplates(): ComboBoxModel<Pair<String, String>> {
+        // TODO - CHRIS - programatically determine the template name and path
+        val workspaceTemplatePairs = listOf(
+            Pair("None", ""),
+            Pair("Mono Repo Angular 13.2.2", "/scripts/Angular/Templates/Workspace/MonoRepoAngular13.2.2.json")
+        )
+
+        return DefaultComboBoxModel<Pair<String,String>>().apply {
+            addAll(workspaceTemplatePairs)
+        }
+    }
+
+    private fun getPackageJsonTemplates(): ComboBoxModel<Pair<String, String>> {
+        // TODO - CHRIS programatically determine the package.json name and path
+        val packageJsonPairs = listOf(
+            Pair("None", ""),
+            Pair("App : Angular 13.2.2", "/scripts/Angular/Templates/Package_Json/app-angular.13.2.2-package.json"),
+            Pair("App : Angular 13.2.2 : Ionic 6.0.3", "/scripts/Angular/Templates/Package_Json/app-angular.13.2.2-ionic.6.0.3-electron-capacitor-package.json")
+        )
+
+        return DefaultComboBoxModel<Pair<String,String>>().apply {
+            addAll(packageJsonPairs)
+        }
+    }
+
+    private fun getPackageManagers(): ComboBoxModel<String> {
+        // TODO - CHRIS - this could probably be an enum, but there could also eventually be any number of package getPackageManagers
+        val packageManagers = listOf("npm")
+
+        return DefaultComboBoxModel<String>().apply {
+            addAll(packageManagers)
+        }
+    }
+
+    private fun getStyles(): ComboBoxModel<String> {
+        //TODO - CHRIS - this can probably be an enum
+        val styles = listOf("scss")
+
+        return DefaultComboBoxModel<String>().apply {
+            addAll(styles)
+        }
+    }
+
+    private fun getViewEncapsulations(): ComboBoxModel<String> {
+        //TODO - CHRIS - this can be an enum,
+        val encapsulations = listOf("Emulated")
+
+        return DefaultComboBoxModel<String>().apply {
+            addAll(encapsulations)
         }
     }
 
@@ -83,5 +176,4 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
     override fun apply() {
 
     }
-
 }
