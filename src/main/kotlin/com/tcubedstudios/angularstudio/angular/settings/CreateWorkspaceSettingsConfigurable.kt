@@ -1,12 +1,17 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import javax.swing.JComponent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.fileChooser.ex.FileChooserDialogImpl
 import com.intellij.openapi.observable.properties.GraphProperty
 import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.observable.util.toUiPathProperty
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
@@ -36,6 +41,17 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
 
     private var sourceRootPath: String = ""
     private lateinit var pathField: TextFieldWithBrowseButton
+
+//    private var selectedDirectory: VirtualFile? = VirtualFileManager.getInstance().findFileByUrl("c:")
+
+    /*init {
+        newWorkspaceSettingsForm.workspacePathButton?.addActionListener {
+            val projectManager = ProjectManager.getInstance()
+            val project = projectManager.defaultProject
+            val fileChooserDescriptor = FileChooserDescriptor(false, true, false, false, false, false)
+            val selectedDirectory = FileChooserDialogImpl(fileChooserDescriptor, project).choose(project, selectedDirectory)
+        }
+    }*/
 
     override fun getDisplayName(): String  = "New Angular Workspace Settings"
 
@@ -174,6 +190,10 @@ class CreateWorkspaceSettingsConfigurable: Configurable {
     override fun isModified(): Boolean= false
 
     override fun apply() {
+//        newWorkspaceSettings.loadState(newWorkspaceSettingsForm.newWorkspaceSettingsState)
+    }
 
+    override fun reset() {
+//        newWorkspaceSettingsForm.newWorkspaceSettingsState = newWorkspaceSettings.state
     }
 }
