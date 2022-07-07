@@ -21,10 +21,11 @@
                                  groupId="angularstudio.base"/>
 
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings"/>
-        <applicationConfigurable id="angularstudio.createworkspace"
-                                 instance="com.tcubedstudios.angularstudio.angular.settings.CreateWorkspaceSettingsConfigurable"
+        <applicationConfigurable id="angularstudio.newworkspace"
+                                 instance="com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettingsConfigurable"
                                  bundle="messages.MyBundle"
-                                 groupId="angularstudio.base"/>
+                                 groupId="angularstudio.base"
+                                 dynamic="true"/>
 
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyProjectService"/>

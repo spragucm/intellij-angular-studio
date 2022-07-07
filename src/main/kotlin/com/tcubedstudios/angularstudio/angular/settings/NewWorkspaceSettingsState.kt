@@ -1,4 +1,6 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
-class NewWorkspaceSettingsState {
-}
+data class NewWorkspaceSettingsState(
+    var workspaceName: String = "",
+    var workspacePath: String = ""
+)

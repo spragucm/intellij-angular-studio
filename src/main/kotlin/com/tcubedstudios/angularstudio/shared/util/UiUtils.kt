@@ -1,5 +1,6 @@
 package com.tcubedstudios.angularstudio.shared.util
 
+import com.intellij.openapi.observable.properties.GraphProperty
 import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
@@ -12,10 +13,13 @@ fun Panel.checkBoxRow(text: String, onClick: (() -> Unit)? = null, horizontalAli
     }
 }
 
-fun Panel.textRow(text: String): Row {
+fun Panel.textRow(text: String, property: GraphProperty<String>, onModified: ((GraphProperty<String>) -> Boolean)? = null): Row {
     return row(text) {
         textField()
-//            .bindText(workspaceNameProperty)
+            .bindText(property)
+            .onIsModified {
+                onModified?.invoke(property) ?: true
+            }
             .horizontalAlign(HorizontalAlign.FILL)
     }
 }

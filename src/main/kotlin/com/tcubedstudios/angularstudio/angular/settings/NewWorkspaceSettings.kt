@@ -1,24 +1,33 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
-import com.intellij.openapi.components.PersistentStateComponent
-import com.intellij.openapi.components.ServiceManager
-import com.intellij.openapi.components.State
-import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.*
 
 @State(
-    name = "com.tcubedstudios.angularstudio.angular.settings.NewWorkspaceSettings",
+    name = "NewWorkspaceSettings",
     storages = [Storage("newWorkspaceSettings.xml")]
 )
-class NewWorkspaceSettings: PersistentStateComponent<NewWorkspaceSettingsState> {
+class NewWorkspaceSettings: PersistentStateComponent<NewWorkspaceSettings> {//NewWorkspaceSettingsState
+
+    var workspaceName: String = ""
+        get() {
+            val blabla = "ljkj"
+            return field
+        }
+        set(value) {
+            val blabblkj = "lkjlj"
+            field = value
+        }
+
     companion object {
         fun getInstance(): NewWorkspaceSettings = ServiceManager.getService(NewWorkspaceSettings::class.java)
     }
 
-    private var newWorkspaceSettingsState = NewWorkspaceSettingsState()
+//    private var newWorkspaceSettingsState = NewWorkspaceSettingsState()
 
-    override fun getState(): NewWorkspaceSettingsState = newWorkspaceSettingsState
+    override fun getState(): NewWorkspaceSettings = this//newWorkspaceSettingsState
 
-    override fun loadState(newWorkspaceSettingsState: NewWorkspaceSettingsState) {
-        this.newWorkspaceSettingsState = newWorkspaceSettingsState
+    override fun loadState(newWorkspaceSettings: NewWorkspaceSettings) {
+        this.workspaceName = newWorkspaceSettings.workspaceName
+        //this.newWorkspaceSettingsState = newWorkspaceSettingsState
     }
 }
