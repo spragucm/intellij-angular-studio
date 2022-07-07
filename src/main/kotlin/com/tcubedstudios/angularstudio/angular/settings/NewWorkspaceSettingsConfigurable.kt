@@ -1,6 +1,7 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
 import com.intellij.ide.projectWizard.NewProjectWizardCollector
+import com.intellij.openapi.Disposable
 import javax.swing.JComponent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.observable.properties.GraphProperty
@@ -8,14 +9,17 @@ import com.intellij.openapi.observable.properties.ObservableMutableProperty
 import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.observable.util.toUiPathProperty
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
+import com.intellij.util.Alarm
 import com.tcubedstudios.angularstudio.shared.util.checkBoxRow
 import com.tcubedstudios.angularstudio.shared.util.textRow
 import javax.swing.ComboBoxModel
 import javax.swing.DefaultComboBoxModel
+import javax.swing.SwingUtilities
 
 class NewWorkspaceSettingsConfigurable: Configurable {
 
@@ -35,26 +39,38 @@ class NewWorkspaceSettingsConfigurable: Configurable {
     private val workspaceTemplatePathProperty: GraphProperty<String> = propertyGraph.property("")
     private var workspaceTemplatePath: String by workspaceTemplatePathProperty
 
-    private val workspacePathProperty: GraphProperty<String> = propertyGraph.property("c:/")
+    private val workspacePathProperty: GraphProperty<String> = propertyGraph.property("a:/")
     private var workspacePath: String by workspacePathProperty
 
-    private val prefixProperty: GraphProperty<String> = propertyGraph.property("c:/")
+    private val prefixProperty: GraphProperty<String> = propertyGraph.property("b:/")
+    private val prefixProperty2: GraphProperty<String> = propertyGraph.property("b:2/")
     private var prefix: String by prefixProperty
 
     private val collectionProperty: GraphProperty<String> = propertyGraph.property("c:/")
     private var collection: String by collectionProperty
 
-    private val newProjectRootProperty: GraphProperty<String> = propertyGraph.property("c:/")
+    private val newProjectRootProperty: GraphProperty<String> = propertyGraph.property("d:/")
     private var newProjectRoot: String by newProjectRootProperty
 
-    private val directoryNameProperty: GraphProperty<String> = propertyGraph.property("c:/")
+    private val directoryNameProperty: GraphProperty<String> = propertyGraph.property("e:/")
     private var directoryName: String by directoryNameProperty
 
     private var sourceRootPath: String = ""
     private lateinit var pathField: TextFieldWithBrowseButton
 
-//    private var selectedDirectory: VirtualFile? = VirtualFileManager.getInstance().findFileByUrl("c:")
+    val alarm = Alarm {}
 
+    private lateinit var panel: DialogPanel
+    private fun initValidation() {
+        alarm.addRequest(Runnable {
+            panel.apply()
+            val modified = panel.isModified()
+            initValidation()
+        }, 5000)
+    }
+
+//    private var selectedDirectory: VirtualFile? = VirtualFileManager.getInstance().findFileByUrl("c:")
+    private val model = Model()
     /*init {
         newWorkspaceSettingsForm.workspacePathButton?.addActionListener {
             val projectManager = ProjectManager.getInstance()
@@ -76,11 +92,15 @@ class NewWorkspaceSettingsConfigurable: Configurable {
         //TODO - CHRIS - should this include the idea of "use template", "if not in template, value is"
 
 //        browserLink(IdeBundle.message("date.format.date.patterns"), "https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html"
-        return panel {
+        panel = panel {
             group {
-                row("Workspace Name2") {
+//                textRow("Prefix2", prefixProperty2) { str ->
+//                    println(str.get())
+//                    true
+//                }
+                row("Workspace Name12") {
                     textField()
-                        .bindText(NewWorkspaceSettings.getInstance().state::workspaceName)
+                        .bindText(NewWorkspaceSettings.getInstance().state::workspaceName)//
 //                        .apply { commentProperty.afterChange { comment?.text = it } }
 //                        .whenTextChangedFromUi {}
 //                        bla.onIsModified {
@@ -142,7 +162,8 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                 checkBoxRow("Replace entire package.json with template")
                 checkBoxRow("Create Worksapce InWorkingDirectory")
                 checkBoxRow("Is Mono Repo")
-                textRow("Prefix", prefixProperty)
+//                textRow("Prefix", prefixProperty)
+
                 checkBoxRow("Routing")
                 checkBoxRow("Strict")
                 row("Style") {
@@ -153,12 +174,18 @@ class NewWorkspaceSettingsConfigurable: Configurable {
             collapsibleGroup("Advanced Settings") {
                 checkBoxRow("Inline Style")
                 checkBoxRow("Inline Template")
-                textRow("New ProjectRoot", newProjectRootProperty)
+                textRow("New ProjectRoot", model::text2) { str ->
+                    println(str.get())
+                    true
+                }
                 row("Package Manager") {
                     comboBox(getPackageManagers(), SimpleListCellRenderer.create("npm") { it })
                         .horizontalAlign(HorizontalAlign.FILL)
                 }
-                textRow("Directory Name", directoryNameProperty)
+                textRow("Directory Name", directoryNameProperty) { str ->
+                    println(str.get())
+                    true
+                }
                 checkBoxRow("Skip Git")
                 checkBoxRow("Skip Tests")
                 checkBoxRow("Clean Install")
@@ -183,6 +210,12 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 
             }.bottomGap(BottomGap.SMALL)
         }
+
+        //SwingUtilities.invokeLater() {
+            initValidation()
+        //}
+
+        return panel
     }
 
     private fun getWorkspaceTemplates(): ComboBoxModel<Pair<String, String>> {
@@ -247,3 +280,8 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 //        newWorkspaceSettingsForm.newWorkspaceSettingsState = newWorkspaceSettings.state
     }
 }
+
+data class Model (
+    var text1: String = "",
+    var text2: String = ""
+)
