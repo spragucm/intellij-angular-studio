@@ -1,11 +1,7 @@
 package com.tcubedstudios.angularstudio.angular.settings
 
-import com.intellij.ide.projectWizard.NewProjectWizardCollector
-import com.intellij.openapi.Disposable
 import javax.swing.JComponent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import com.intellij.openapi.observable.properties.GraphProperty
-import com.intellij.openapi.observable.properties.ObservableMutableProperty
 import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.observable.util.toUiPathProperty
 import com.intellij.openapi.options.Configurable
@@ -15,11 +11,14 @@ import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import com.intellij.util.Alarm
+import com.tcubedstudios.angularstudio.angular.terminal.args.PackageManager
+import com.tcubedstudios.angularstudio.angular.terminal.args.Style
+import com.tcubedstudios.angularstudio.angular.terminal.args.ViewEncapsulation
 import com.tcubedstudios.angularstudio.shared.util.checkBoxRow
+import com.tcubedstudios.angularstudio.shared.util.comboBoxRow
 import com.tcubedstudios.angularstudio.shared.util.textRow
 import javax.swing.ComboBoxModel
 import javax.swing.DefaultComboBoxModel
-import javax.swing.SwingUtilities
 
 class NewWorkspaceSettingsConfigurable: Configurable {
 
@@ -28,32 +27,15 @@ class NewWorkspaceSettingsConfigurable: Configurable {
         private const val COLUMN2 = "column2"
     }
 
+    private val settings: NewWorkspaceSettings
+        get() {
+            return NewWorkspaceSettings.getInstance().state
+        }
+
     private var newWorkspaceSettings = NewWorkspaceSettings.getInstance()
     //private var newWorkspaceSettingsState = newWorkspaceSettings.state
 
     private val propertyGraph = PropertyGraph()
-
-    private val workspaceNameProperty: ObservableMutableProperty<String> = propertyGraph.property("alsdkjflaksdjf ")//newWorkspaceSettings.state.workspaceName
-    private var workspaceName: String by workspaceNameProperty
-
-    private val workspaceTemplatePathProperty: GraphProperty<String> = propertyGraph.property("")
-    private var workspaceTemplatePath: String by workspaceTemplatePathProperty
-
-    private val workspacePathProperty: GraphProperty<String> = propertyGraph.property("a:/")
-    private var workspacePath: String by workspacePathProperty
-
-    private val prefixProperty: GraphProperty<String> = propertyGraph.property("b:/")
-    private val prefixProperty2: GraphProperty<String> = propertyGraph.property("b:2/")
-    private var prefix: String by prefixProperty
-
-    private val collectionProperty: GraphProperty<String> = propertyGraph.property("c:/")
-    private var collection: String by collectionProperty
-
-    private val newProjectRootProperty: GraphProperty<String> = propertyGraph.property("d:/")
-    private var newProjectRoot: String by newProjectRootProperty
-
-    private val directoryNameProperty: GraphProperty<String> = propertyGraph.property("e:/")
-    private var directoryName: String by directoryNameProperty
 
     private var sourceRootPath: String = ""
     private lateinit var pathField: TextFieldWithBrowseButton
@@ -70,7 +52,6 @@ class NewWorkspaceSettingsConfigurable: Configurable {
     }
 
 //    private var selectedDirectory: VirtualFile? = VirtualFileManager.getInstance().findFileByUrl("c:")
-    private val model = Model()
     /*init {
         newWorkspaceSettingsForm.workspacePathButton?.addActionListener {
             val projectManager = ProjectManager.getInstance()
@@ -94,13 +75,10 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 //        browserLink(IdeBundle.message("date.format.date.patterns"), "https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html"
         panel = panel {
             group {
-//                textRow("Prefix2", prefixProperty2) { str ->
-//                    println(str.get())
-//                    true
-//                }
-                row("Workspace Name12") {
-                    textField()
-                        .bindText(NewWorkspaceSettings.getInstance().state::workspaceName)//
+                textRow("Workspace Name", settings::workspaceName)
+//                row("Workspace Name12") {
+//                    textField()
+//                        .bindText(settings::workspaceName)//
 //                        .apply { commentProperty.afterChange { comment?.text = it } }
 //                        .whenTextChangedFromUi {}
 //                        bla.onIsModified {
@@ -125,14 +103,14 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 //                        .validationOnInput { validateModuleName() }
 //                        .validationOnApply { validateModuleName() }
 //                        .whenTextChangedFromUi { NewProjectWizardCollector.BuildSystem.logModuleNameChanged() }
-                        .horizontalAlign(HorizontalAlign.FILL)
-                }
+//                        .horizontalAlign(HorizontalAlign.FILL)
+//                }
 
                 /*textRow("Workspace Name", workspaceNameProperty) {
                     newWorkspaceSettings.state.workspaceName = it.get()
                     return@textRow true
                 }*/
-                checkBoxRow("Force")
+                checkBoxRow("Force", settings::force)
             }
             collapsibleGroup("Standard Settings") {
                 row("Workspace Template") {
@@ -147,7 +125,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                         null
                     )
                         .horizontalAlign(HorizontalAlign.FILL)
-                        .bindText(workspacePathProperty.toUiPathProperty())
+                        .bindText(settings::workspacePath)//.toUiPathProperty()
 //                        .onIsModified {
 //                            //TODO - CHRIS
 //                            return@onIsModified true
@@ -159,55 +137,38 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                     comboBox(getPackageJsonTemplates(), SimpleListCellRenderer.create("") { it.first })
                         .horizontalAlign(HorizontalAlign.FILL)
                 }
-                checkBoxRow("Replace entire package.json with template")
-                checkBoxRow("Create Worksapce InWorkingDirectory")
-                checkBoxRow("Is Mono Repo")
-//                textRow("Prefix", prefixProperty)
-
-                checkBoxRow("Routing")
-                checkBoxRow("Strict")
-                row("Style") {
-                    comboBox(getStyles(), SimpleListCellRenderer.create("scss") { it })
-                        .horizontalAlign(HorizontalAlign.FILL)
-                }
+                checkBoxRow("Replace entire package.json with template", settings::replaceEntireJsonWithTemplate)
+                checkBoxRow("Create Worksapce InWorkingDirectory", settings::createWorkspaceInWorkingDirectory)
+                checkBoxRow("Is Mono Repo", settings::isMonoRepo)
+                textRow("Prefix", settings::prefix)
+                checkBoxRow("Routing", settings::routing)
+                checkBoxRow("Strict", settings::strict)
+                comboBoxRow("Style", settings::style, Style::class.java)
             }
             collapsibleGroup("Advanced Settings") {
-                checkBoxRow("Inline Style")
-                checkBoxRow("Inline Template")
-                textRow("New ProjectRoot", model::text2) { str ->
-                    println(str.get())
-                    true
-                }
-                row("Package Manager") {
-                    comboBox(getPackageManagers(), SimpleListCellRenderer.create("npm") { it })
-                        .horizontalAlign(HorizontalAlign.FILL)
-                }
-                textRow("Directory Name", directoryNameProperty) { str ->
-                    println(str.get())
-                    true
-                }
-                checkBoxRow("Skip Git")
-                checkBoxRow("Skip Tests")
-                checkBoxRow("Clean Install")
+                checkBoxRow("Inline Style", settings::inlineStyle)
+                checkBoxRow("Inline Template", settings::inlineTemplate)
+                textRow("New ProjectRoot", settings::newProjectRoot)
+                comboBoxRow("Package Manager", settings::packageManager, PackageManager::class.java)
+                textRow("Directory Name", settings::directoryName)
+                checkBoxRow("Skip Git", settings::skipGit)
+                checkBoxRow("Skip Tests", settings::skipTests)
+                checkBoxRow("Clean Install", settings::cleanInstall)
             }
             collapsibleGroup("Obscure Settings") {
-                checkBoxRow("Defaults")
-                checkBoxRow("Dry Run")
-                textRow("Collection", collectionProperty)
-                checkBoxRow("Commit")
-                checkBoxRow("Interactive")
-                checkBoxRow("Minimal")
-                checkBoxRow("Skip Install")
-                checkBoxRow("Verbose")
-                row("View Encapsulation") {
-                    comboBox(getViewEncapsulations(), SimpleListCellRenderer.create("Emulated") { it })
-                        .horizontalAlign(HorizontalAlign.FILL)
-                }
-                checkBoxRow("Show Critical Dialogs")
-                checkBoxRow("Show Standard Dialogs")
-                checkBoxRow("Show Advanced Dialogs")
-                checkBoxRow("Show Obscure Dialogs")
-
+                checkBoxRow("Defaults", settings::defaults)
+                checkBoxRow("Dry Run", settings::dryRun)
+                textRow("Collection", settings::collection)
+                checkBoxRow("Commit", settings::commit)
+                checkBoxRow("Interactive", settings::interactive)
+                checkBoxRow("Minimal", settings::minimal)
+                checkBoxRow("Skip Install", settings::skipInstall)
+                checkBoxRow("Verbose", settings::verbose)
+                comboBoxRow("View Encapsulation", settings::viewEncapsulation, ViewEncapsulation::class.java)
+                checkBoxRow("Show Critical Dialogs", settings::showCriticalDialogs)
+                checkBoxRow("Show Standard Dialogs", settings::showStandardDialogs)
+                checkBoxRow("Show Advanced Dialogs", settings::showAdvancedDialogs)
+                checkBoxRow("Show Obscure Dialogs", settings::showObscureDialogs)
             }.bottomGap(BottomGap.SMALL)
         }
 
@@ -280,8 +241,3 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 //        newWorkspaceSettingsForm.newWorkspaceSettingsState = newWorkspaceSettings.state
     }
 }
-
-data class Model (
-    var text1: String = "",
-    var text2: String = ""
-)
