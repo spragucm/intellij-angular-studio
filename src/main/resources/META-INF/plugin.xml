@@ -69,5 +69,17 @@
                 description="Set current directory location as the default path for external terminal">
             <add-to-group group-id="RunContextPopupGroup" anchor="last"/>
         </action>
+        <action id="com.tcubedstudios.angularstudio.tabmanagement.CloseRight"
+                class="com.tcubedstudios.angularstudio.tabmanagement.CloseRight"
+                text="Close All Tabs to Right"
+                description="Closes the tab to the right of the currently selected tab">
+            <add-to-group group-id="EditorTabPopupMenu" relative-to-action="CloseEditorsGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.tabmanagement.CloseLeft"
+                class="com.tcubedstudios.angularstudio.tabmanagement.CloseLeft"
+                text="Close All Tabs to Left"
+                description="Close tab to the left of the currently selected tab">
+                <add-to-group group-id="EditorTabPopupMenu" relative-to-action="CloseEditorsGroup" anchor="after"/>
+        </action>
     </actions>
 </idea-plugin>

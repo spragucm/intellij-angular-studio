@@ -1,5 +1,9 @@
 package com.tcubedstudios.angularstudio.shared.util
 
+import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
+import com.intellij.openapi.vfs.VirtualFile
+import com.tcubedstudios.angularstudio.shared.Direction
+import com.tcubedstudios.angularstudio.shared.util.TabUtils.isToThe
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
@@ -90,5 +94,14 @@ object FileUtils {
     // https://www.baeldung.com/java-temp-directories
     fun createTempDirectory(prefix: String = "AngularStudio"): String {
         return Files.createTempDirectory(prefix).toFile().absolutePath
+    }
+    fun FileEditorManagerEx.files(direction: Direction): List<VirtualFile> {
+        return if (!hasOpenedFile()) {
+            emptyList()
+        } else {
+            currentWindow.files.run {
+                filter { indexOf(it) isToThe direction of indexOf(currentFile) }
+            }
+        }
     }
 }
