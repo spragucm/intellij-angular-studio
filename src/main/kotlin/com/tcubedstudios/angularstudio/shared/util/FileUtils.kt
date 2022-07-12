@@ -1,7 +1,12 @@
 package com.tcubedstudios.angularstudio.shared.util
 
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
+import com.tcubedstudios.angularstudio.cli.navigation.SwapOpenFileFromToAction
 import com.tcubedstudios.angularstudio.shared.Direction
 import com.tcubedstudios.angularstudio.shared.util.TabUtils.isToThe
 import java.io.*
@@ -103,5 +108,38 @@ object FileUtils {
                 filter { indexOf(it) isToThe direction of indexOf(currentFile) }
             }
         }
+    }
+
+    fun getFileByPath(path: String): VirtualFile? = LocalFileSystem.getInstance().findFileByPath(path)
+
+    fun swapOpenFileFromTo(project: Project, directoryPath: String, fileName: String, extensionToClose: String, extensionToOpen: String) {
+        if (extensionToClose == extensionToOpen) return
+
+        val filePath = "$directoryPath//$fileName"
+        val fileToClosePath = "$filePath.$extensionToClose"
+        val fileToOpenPath = "$filePath.$extensionToOpen"
+
+        val fileToClose = getFileByPath(fileToClosePath) ?: return
+        val fileToOpen = getFileByPath(fileToOpenPath) ?: return
+        if (!fileToClose.exists() || !fileToOpen.exists()) return
+
+        FileEditorManager.getInstance(project).closeFile(fileToClose)
+        OpenFileDescriptor(project, fileToOpen).navigate(true)
+    }
+    fun getNextExtensionForFileName(directoryPath: String, fileName: String, currentExtension: String, extensions: List<String>): String {
+        val currentIndex: Int = extensions.indexOf(currentExtension)
+        if (currentIndex == -1) return currentExtension
+
+        // Determine what file is next based on both the desired extensions and whether the file exists, given
+        // that there may or may not be a file with the next desired extension.
+        val basePath = "$directoryPath\\$fileName"
+        for (i in SwapOpenFileFromToAction.extensions.indices) {
+            val newIndex: Int = (currentIndex + 1 + i) % SwapOpenFileFromToAction.extensions.size
+            val newExtension: String = SwapOpenFileFromToAction.extensions[newIndex]
+            val newPath = "$basePath.$newExtension"
+            val newFile = getFileByPath(newPath)
+            if (newFile != null && newFile.exists()) return newExtension
+        }
+        return currentExtension
     }
 }
