@@ -6,6 +6,7 @@ import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.psi.PsiFile
 import com.tcubedstudios.angularstudio.cli.navigation.SwapOpenFileFromToAction
 import com.tcubedstudios.angularstudio.shared.Direction
 import com.tcubedstudios.angularstudio.shared.util.TabUtils.isToThe
@@ -13,6 +14,7 @@ import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
 import java.nio.file.*
+import javax.swing.Icon
 
 
 object FileUtils {
@@ -142,4 +144,21 @@ object FileUtils {
         }
         return currentExtension
     }
+
+    fun PsiFile.hasMatchingExtension(extensions: Map<String, Icon>): Boolean {
+        return name.substringAfterLast(".").lowercase() in extensions
+    }
+
+    fun PsiFile.getNextSiblingWithExtension(extensions: Map<String, Icon>): PsiFile? {
+        val name = name.substringBeforeLast(".")
+        val siblings = parent?.files ?: return null
+
+        return siblings.firstOrNull {
+            it.name.substringBeforeLast(".") == name && it.hasMatchingExtension(extensions)
+        }
+    }
+
+    fun PsiFile.fileManager(): FileEditorManagerEx = this.project.fileManager()
+
+    fun Project.fileManager(): FileEditorManagerEx = FileEditorManagerEx.getInstanceEx(this)
 }
