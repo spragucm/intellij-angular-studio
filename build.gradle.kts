@@ -27,8 +27,9 @@ repositories {
 }
 
 dependencies {
+
 //    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-//    implementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
 //    implementation("javax.annotation:javax.annotation-api:1.2")
 //    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 }
@@ -38,9 +39,10 @@ intellij {
     pluginName.set(properties("pluginName"))
     version.set(properties("platformVersion"))
     type.set(properties("platformType"))
+    plugins.set(listOf("terminal", "AngularJS", "java", "sass", "JavaScriptLanguage"))
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
+//    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
