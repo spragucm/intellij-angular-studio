@@ -4,8 +4,29 @@
     <name>Angular Studio</name>
     <vendor>tCubed Studios</vendor>
 
+    <change-notes><![CDATA[
+        0.1.3
+        <ul>
+            <li>TODO</li>
+        </ul>
+
+        0.1.2
+        <ul>
+            <li>TODO</li>
+            <li>TODO</li>
+        </ul>
+
+        0.1.1
+        <ul>
+            <li>TODO</li>
+        </ul>
+        ]]></change-notes>
+
     <depends>com.intellij.modules.platform</depends>
+<!--    <depends>com.intellij.modules.ultimate</depends>-->
     <depends>org.jetbrains.plugins.terminal</depends>
+    <depends>JavaScript</depends>
+    <depends>org.jetbrains.plugins.sass</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="angularstudio.base"
@@ -86,6 +107,21 @@
                 text="Quick Switch"
                 description="Quickly switches between Angular CLI files for on component, e.g. ts, html, css">
             <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularStylesAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularStylesAction"
+                text="Open Angular Template1">
+            <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularCodeAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularCodeAction"
+                text="Open Angular Template2">
+            <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularTemplateAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularTemplateAction"
+                text="Open Angular Template3">
+            <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
