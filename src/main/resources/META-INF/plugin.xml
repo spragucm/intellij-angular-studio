@@ -50,6 +50,7 @@
 
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyProjectService"/>
+        <treeStructureProvider implementation="com.tcubedstudios.angularstudio.angular.navigation.projectview.AngularTreeStructureProvider"/>
     </extensions>
 
     <applicationListeners>
@@ -63,6 +64,7 @@
                 text="Terminal"
                 description="Open the project directory in external terminal"
                 icon="/icons/terminal.png">
+<!--            icon="Icons.TERMINAL_ICON-->
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
@@ -72,6 +74,7 @@
                 text="Open in External Terminal"
                 description="Open current file location in external terminal"
                 icon="/icons/terminal.png">
+<!--            icon="Icons.TERMINAL_ICON"-->
             <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="after"-->
             <!--relative-to-action="ProjectViewPopupMenuRunGroup"/>-->
                 <add-to-group group-id="RunContextPopupGroup" anchor="before" relative-to-action="OpenInBrowser"/>
@@ -108,18 +111,18 @@
                 description="Quickly switches between Angular CLI files for on component, e.g. ts, html, css">
             <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
         </action>
-        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularStylesAction"
-                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularStylesAction"
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularStylesAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularStylesAction"
                 text="Open Angular Template1">
             <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>
-        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularCodeAction"
-                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularCodeAction"
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularCodeAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularCodeAction"
                 text="Open Angular Template2">
             <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>
-        <action id="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularTemplateAction"
-                class="com.tcubedstudios.angularstudio.angular.navigation.OpenAngularTemplateAction"
+        <action id="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularTemplateAction"
+                class="com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons.OpenAngularTemplateAction"
                 text="Open Angular Template3">
             <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>

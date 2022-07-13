@@ -1,6 +1,5 @@
-package com.tcubedstudios.angularstudio.angular.navigation
+package com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons
 
-import com.intellij.icons.AllIcons
 import com.intellij.icons.AllIcons.FileTypes.Css
 import com.tcubedstudios.angularstudio.cli.navigation.OpenFileWithExtensionAction
 import icons.SassIcons.Sass
