@@ -1,9 +1,8 @@
-package com.tcubedstudios.angularstudio.cli.navigation
+package com.tcubedstudios.angularstudio.ide.navigation
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
-import com.intellij.openapi.vfs.VirtualFile
 import com.tcubedstudios.angularstudio.shared.util.FileUtils.getNextExtensionForFileName
 import com.tcubedstudios.angularstudio.shared.util.FileUtils.swapOpenFileFromTo
 

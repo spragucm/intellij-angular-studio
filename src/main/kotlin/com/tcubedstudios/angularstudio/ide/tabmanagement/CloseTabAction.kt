@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.cli.tabmanagement
+package com.tcubedstudios.angularstudio.ide.tabmanagement
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.DumbAwareAction

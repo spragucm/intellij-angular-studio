@@ -1,12 +1,10 @@
-package com.tcubedstudios.angularstudio.cli.navigation
+package com.tcubedstudios.angularstudio.ide.navigation
 
-import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction
 //import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys.PSI_FILE
 import com.intellij.openapi.actionSystem.CommonDataKeys.EDITOR
-import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
 import com.tcubedstudios.angularstudio.shared.util.FileUtils.fileManager
 import com.tcubedstudios.angularstudio.shared.util.FileUtils.getNextSiblingWithExtension
 import com.tcubedstudios.angularstudio.shared.util.FileUtils.hasMatchingExtension

@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.cli.tabmanagement
+package com.tcubedstudios.angularstudio.ide.tabmanagement
 
 import com.tcubedstudios.angularstudio.shared.Direction.RIGHT
 
