@@ -1,15 +1,15 @@
-package com.tcubedstudios.angularstudio.ide.navigation
+package com.tcubedstudios.angularstudio.ide.navigation.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 //import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys.PSI_FILE
 import com.intellij.openapi.actionSystem.CommonDataKeys.EDITOR
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.fileManager
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.getNextSiblingWithExtension
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.hasMatchingExtension
-import com.tcubedstudios.angularstudio.shared.util.WindowUtils.hasEditor
-import com.tcubedstudios.angularstudio.shared.util.WindowUtils.hasFile
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.fileManager
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.getNextSiblingWithExtension
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.hasMatchingExtension
+import com.tcubedstudios.angularstudio.shared.utils.WindowUtils.hasEditor
+import com.tcubedstudios.angularstudio.shared.utils.WindowUtils.hasFile
 //import com.intellij.psi.PsiFile
 //import icons.JavaScriptPsiIcons
 //import icons.SassIcons

@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared.util
+package com.tcubedstudios.angularstudio.shared.utils
 
 import com.intellij.openapi.observable.properties.GraphProperty
 import com.intellij.ui.dsl.builder.*

@@ -10,7 +10,7 @@ import com.intellij.ide.util.treeView.AbstractTreeNode
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
-import com.tcubedstudios.angularstudio.shared.Constants.ICON_TYPE_SERVICE
+import com.tcubedstudios.angularstudio.shared.simpletons.Constants.ICON_TYPE_SERVICE
 
 class ComponentFileGroup(
     project: Project,

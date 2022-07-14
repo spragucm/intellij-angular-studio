@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared
+package com.tcubedstudios.angularstudio.shared.simpletons
 
 object Constants {
     const val ICON_TYPE_SERVICE = "service"

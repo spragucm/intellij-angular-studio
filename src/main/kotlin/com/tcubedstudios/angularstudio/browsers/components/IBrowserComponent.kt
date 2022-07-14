@@ -1,5 +1,6 @@
-package com.tcubedstudios.angularstudio.browsers
+package com.tcubedstudios.angularstudio.browsers.components
 
+import com.tcubedstudios.angularstudio.browsers.simpletons.BrowserComponentType
 import javax.swing.JComponent
 
 interface IBrowserComponent {

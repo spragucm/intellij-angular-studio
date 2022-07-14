@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.browsers
+package com.tcubedstudios.angularstudio.browsers.components
 
 import java.awt.Dimension
 import javax.swing.JButton

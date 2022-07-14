@@ -1,7 +1,7 @@
-package com.tcubedstudios.angularstudio.terminal.model
+package com.tcubedstudios.angularstudio.terminal.simpletons
 
 import java.io.File
-import com.tcubedstudios.angularstudio.terminal.model.TerminalType.*
+import com.tcubedstudios.angularstudio.terminal.simpletons.TerminalType.*
 
 enum class OperatingSystem(val osName: String) {
     WINDOWS("win"),

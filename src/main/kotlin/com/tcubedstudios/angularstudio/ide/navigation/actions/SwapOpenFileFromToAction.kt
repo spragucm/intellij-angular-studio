@@ -1,10 +1,10 @@
-package com.tcubedstudios.angularstudio.ide.navigation
+package com.tcubedstudios.angularstudio.ide.navigation.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.getNextExtensionForFileName
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.swapOpenFileFromTo
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.getNextExtensionForFileName
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.swapOpenFileFromTo
 
 class SwapOpenFileFromToAction: AnAction("QuickSwitch") {
     //TODO - CHRIS - this should be a selectable list in settings

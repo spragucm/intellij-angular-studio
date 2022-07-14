@@ -1,9 +1,10 @@
-package com.tcubedstudios.angularstudio.browsers
+package com.tcubedstudios.angularstudio.browsers.components
 
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
 import com.intellij.ui.jcef.JBCefBrowser
-import com.tcubedstudios.angularstudio.shared.Constants.BLANK_PAGE_URL
+import com.tcubedstudios.angularstudio.browsers.simpletons.BrowserComponentType
+import com.tcubedstudios.angularstudio.shared.simpletons.Constants.BLANK_PAGE_URL
 import org.cef.browser.CefBrowser
 import org.cef.browser.CefFrame
 import org.cef.handler.CefDisplayHandlerAdapter

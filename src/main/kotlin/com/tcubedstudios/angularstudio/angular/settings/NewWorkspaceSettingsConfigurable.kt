@@ -3,7 +3,6 @@ package com.tcubedstudios.angularstudio.angular.settings
 import javax.swing.JComponent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.observable.properties.PropertyGraph
-import com.intellij.openapi.observable.util.toUiPathProperty
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
@@ -14,9 +13,9 @@ import com.intellij.util.Alarm
 import com.tcubedstudios.angularstudio.angular.terminal.args.PackageManager
 import com.tcubedstudios.angularstudio.angular.terminal.args.Style
 import com.tcubedstudios.angularstudio.angular.terminal.args.ViewEncapsulation
-import com.tcubedstudios.angularstudio.shared.util.checkBoxRow
-import com.tcubedstudios.angularstudio.shared.util.comboBoxRow
-import com.tcubedstudios.angularstudio.shared.util.textRow
+import com.tcubedstudios.angularstudio.shared.utils.checkBoxRow
+import com.tcubedstudios.angularstudio.shared.utils.comboBoxRow
+import com.tcubedstudios.angularstudio.shared.utils.textRow
 import javax.swing.ComboBoxModel
 import javax.swing.DefaultComboBoxModel
 

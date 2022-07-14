@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared
+package com.tcubedstudios.angularstudio.shared.simpletons
 
 enum class Direction {
     UP,

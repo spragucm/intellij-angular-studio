@@ -1,7 +1,7 @@
-package com.tcubedstudios.angularstudio.shared.util
+package com.tcubedstudios.angularstudio.shared.utils
 
-import com.tcubedstudios.angularstudio.shared.Direction
-import com.tcubedstudios.angularstudio.shared.Direction.LEFT
+import com.tcubedstudios.angularstudio.shared.simpletons.Direction
+import com.tcubedstudios.angularstudio.shared.simpletons.Direction.LEFT
 
 object TabUtils {
     internal infix fun Int.isToThe(direction: Direction) = IsToThe(this, direction)

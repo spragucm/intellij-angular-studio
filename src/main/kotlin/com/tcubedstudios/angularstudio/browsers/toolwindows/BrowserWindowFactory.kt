@@ -1,17 +1,14 @@
-package com.tcubedstudios.angularstudio.browsers
+package com.tcubedstudios.angularstudio.browsers.toolwindows
 
 
-import java.lang.reflect.Method
-import java.util.Objects
 import javax.swing.*
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
-import com.intellij.ui.content.Content
 import com.intellij.ui.content.ContentFactory
 import com.intellij.util.ReflectionUtil.getDeclaredMethod
 import com.intellij.util.ui.JBUI
+import com.tcubedstudios.angularstudio.browsers.components.JcefBrowserComponent
 import javax.swing.SwingConstants.CENTER
 import javax.swing.SwingConstants.TOP
 
@@ -42,7 +39,7 @@ class BrowserWindowFactory: ToolWindowFactory {
     private fun getBrowser(): JComponent {
         try {
             if (isJcefSupported) {
-                //Class.forName("com.tcubedstudios.angularstudio.browsers.JcefBrowserComponent")//TODO - CHRIS - why is this using reflection?
+                //Class.forName("com.tcubedstudios.angularstudio.browsers.components.JcefBrowserComponent")//TODO - CHRIS - why is this using reflection?
                 return BrowserWindow(JcefBrowserComponent())
             }
         } catch (e: Exception) {}

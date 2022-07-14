@@ -3,7 +3,7 @@ package com.tcubedstudios.angularstudio.terminal.actions
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.diagnostic.Logger
-import com.tcubedstudios.angularstudio.terminal.model.Environment
+import com.tcubedstudios.angularstudio.terminal.simpletons.Environment
 import com.tcubedstudios.angularstudio.terminal.settings.TerminalSettings
 import com.tcubedstudios.angularstudio.terminal.settings.TerminalSettingsState
 import com.tcubedstudios.angularstudio.terminal.utils.OperatingSystemUtils

@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared.util
+package com.tcubedstudios.angularstudio.shared.utils
 
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
@@ -7,9 +7,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
-import com.tcubedstudios.angularstudio.ide.navigation.SwapOpenFileFromToAction
-import com.tcubedstudios.angularstudio.shared.Direction
-import com.tcubedstudios.angularstudio.shared.util.TabUtils.isToThe
+import com.tcubedstudios.angularstudio.ide.navigation.actions.SwapOpenFileFromToAction
+import com.tcubedstudios.angularstudio.shared.simpletons.Direction
+import com.tcubedstudios.angularstudio.shared.utils.TabUtils.isToThe
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL

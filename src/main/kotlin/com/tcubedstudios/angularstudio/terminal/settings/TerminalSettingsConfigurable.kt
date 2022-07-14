@@ -8,8 +8,8 @@ import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.tcubedstudios.angularstudio.terminal.model.TerminalType
-import com.tcubedstudios.angularstudio.terminal.model.TerminalType.GENERIC
+import com.tcubedstudios.angularstudio.terminal.simpletons.TerminalType
+import com.tcubedstudios.angularstudio.terminal.simpletons.TerminalType.GENERIC
 import org.jdesktop.swingx.util.OS
 import javax.swing.JComponent
 

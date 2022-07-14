@@ -1,14 +1,14 @@
 package com.tcubedstudios.angularstudio.terminal.utils
 
 import com.intellij.openapi.diagnostic.Logger
-import com.tcubedstudios.angularstudio.terminal.model.Command
-import com.tcubedstudios.angularstudio.terminal.model.Environment
-import com.tcubedstudios.angularstudio.terminal.model.OperatingSystem
-import com.tcubedstudios.angularstudio.terminal.model.OperatingSystem.*
-import com.tcubedstudios.angularstudio.terminal.model.OperatingSystem.Companion.getDefaultTerminalType
-import com.tcubedstudios.angularstudio.terminal.model.OperatingSystem.UNKNOWN
-import com.tcubedstudios.angularstudio.terminal.model.TerminalType
-import com.tcubedstudios.angularstudio.terminal.model.TerminalType.*
+import com.tcubedstudios.angularstudio.terminal.simpletons.Command
+import com.tcubedstudios.angularstudio.terminal.simpletons.Environment
+import com.tcubedstudios.angularstudio.terminal.simpletons.OperatingSystem
+import com.tcubedstudios.angularstudio.terminal.simpletons.OperatingSystem.*
+import com.tcubedstudios.angularstudio.terminal.simpletons.OperatingSystem.Companion.getDefaultTerminalType
+import com.tcubedstudios.angularstudio.terminal.simpletons.OperatingSystem.UNKNOWN
+import com.tcubedstudios.angularstudio.terminal.simpletons.TerminalType
+import com.tcubedstudios.angularstudio.terminal.simpletons.TerminalType.*
 import java.io.File
 import java.util.regex.Pattern
 

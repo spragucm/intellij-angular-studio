@@ -1,12 +1,12 @@
-package com.tcubedstudios.angularstudio.ide.tabmanagement
+package com.tcubedstudios.angularstudio.ide.tabmanagement.actions
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
 import com.intellij.openapi.vfs.VirtualFile
-import com.tcubedstudios.angularstudio.shared.Direction
-import com.tcubedstudios.angularstudio.shared.util.FileUtils.files
+import com.tcubedstudios.angularstudio.shared.simpletons.Direction
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils.files
 
-class CloseTabLeftRight(
+class CloseTabLeftRightAction(
     private val event: AnActionEvent,
     private val direction: Direction,
     private val editorManager: FileEditorManagerEx = FileEditorManagerEx.getInstanceEx(event.project!!),

@@ -7,7 +7,7 @@ import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.wm.ToolWindowManager
 import com.tcubedstudios.angularstudio.terminal.utils.getEventProject
-import com.tcubedstudios.angularstudio.shared.util.FileUtils
+import com.tcubedstudios.angularstudio.shared.utils.FileUtils
 import org.jetbrains.plugins.terminal.ShellTerminalWidget
 import org.jetbrains.plugins.terminal.TerminalToolWindowFactory
 import org.jetbrains.plugins.terminal.TerminalView

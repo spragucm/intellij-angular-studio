@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared.util
+package com.tcubedstudios.angularstudio.shared.utils
 
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem

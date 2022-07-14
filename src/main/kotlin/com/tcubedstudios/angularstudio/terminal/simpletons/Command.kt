@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.terminal.model
+package com.tcubedstudios.angularstudio.terminal.simpletons
 
 import com.intellij.openapi.diagnostic.Logger
 import java.io.File

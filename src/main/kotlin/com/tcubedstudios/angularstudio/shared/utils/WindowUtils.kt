@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.shared.util
+package com.tcubedstudios.angularstudio.shared.utils
 
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.TextEditor

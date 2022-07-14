@@ -1,8 +1,10 @@
-package com.tcubedstudios.angularstudio.browsers
+package com.tcubedstudios.angularstudio.browsers.toolwindows
 
-import com.tcubedstudios.angularstudio.shared.Constants.BLANK_PAGE_URL
-import com.tcubedstudios.angularstudio.shared.Constants.DEV_TOOLS_TEXT
-import com.tcubedstudios.angularstudio.shared.Constants.GO_TEXT
+import com.tcubedstudios.angularstudio.browsers.components.ControlButton
+import com.tcubedstudios.angularstudio.browsers.components.IBrowserComponent
+import com.tcubedstudios.angularstudio.shared.simpletons.Constants.BLANK_PAGE_URL
+import com.tcubedstudios.angularstudio.shared.simpletons.Constants.DEV_TOOLS_TEXT
+import com.tcubedstudios.angularstudio.shared.simpletons.Constants.GO_TEXT
 import com.tcubedstudios.angularstudio.shared.libs.shopobot.URL
 import java.awt.BorderLayout
 import java.awt.BorderLayout.CENTER

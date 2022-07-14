@@ -1,7 +1,7 @@
 package com.tcubedstudios.angularstudio.angular.navigation.hoverbuttons
 
 import com.intellij.icons.AllIcons.FileTypes.Css
-import com.tcubedstudios.angularstudio.ide.navigation.OpenFileWithExtensionAction
+import com.tcubedstudios.angularstudio.ide.navigation.actions.OpenFileWithExtensionAction
 import icons.SassIcons.Sass
 
 class OpenAngularStylesAction: OpenFileWithExtensionAction("Open Component Styles 2", Css) {
