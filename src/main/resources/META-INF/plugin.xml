@@ -121,5 +121,65 @@
                 text="Open Angular Template3">
             <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>
+        <group id="GenerateComponentGroupFromMainMenu" popup="true" text="Angular Gen from Main">
+            <add-to-group group-id="MainMenu"/>
+        </group>
+        <!--
+            Options we want, and will only show if enabled in settings
+            1. Right-click on a project -> New -> Generate each schematic under the Angular Plugin Options
+                a. Option for gen
+                b. Option for gen and show dialog
+            2. Right-click on a project -> Angular Studio -> Generate each schematic
+                a. Option for gen
+                b. Option for gen and show dialog
+            3. Right-click on a project -> Flat gen options in their own section with dividers
+                a. Option for gen
+                b. Option for gen and show dialog
+        -->
+        <group id="GenerateComponentGroup" popup="true" text="Angular Studio">
+            <action id="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentAction"
+                    class="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentAction"
+                    text="Component"
+                    description="Generate an angular component in the current directory using options from settings"
+                    icon="AngularJSIcons.Angular2">
+            </action>
+
+
+            <add-to-group group-id="ToolsMenu"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="NewGroup" anchor="after" relative-to-action="angularCliGenerate"/>
+        </group>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentDialogAction"
+                text="Show Dialog with Options"
+                description="Show dialog with options for generating an angular component">
+            <add-to-group group-id="GenerateComponentGroup"/>
+            <add-to-group group-id="GenerateComponentGroupFromMainMenu"/>
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
+            <add-to-group group-id="RunContextPopupGroup" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="GenerateComponentGroup" anchor="after"/>
+        </action>
+        <action id="angularStudioCliGenerate"
+                class="org.angular2.cli.actions.AngularCliGenerateAction"
+                text="Show Angular Generate Dialog"
+                description="Show Angular generate dialog (same as 'Angular Schematics...' dialog from Angular Plugin)">
+            <add-to-group group-id="GenerateComponentGroup"/>
+        </action>
+        <!--<action id="com.tcubedstudios.angularstudio.angular.ExpandClassToItsOwnFile"
+                class="com.tcubedstudios.angularstudio.angular.ExpandClassToItsOwnFile"
+                text="Extract inlined style to its own file"
+                description="Extract inlined style to its own file">
+            <add-to-group group-id="EditorTabPopupMenu" relative-to-action="CloseEditorsGroup" anchor="after"/>
+        </action>-->
+        <!--<action id="com.tcubedstudios.angularstudio.angular.InlineStyleWithComponent"
+                class="com.tcubedstudios.angularstudio.angular.InlineStyleWithComponent"
+                text="Inline extracted style with relevant component"
+                description="Inline extracted style with relevant component">
+            <add-to-group group-id="EditorTabPopupMenu" relative-to-action="CloseEditorsGroup" anchor="after"/>
+        </action>-->
     </actions>
 </idea-plugin>
