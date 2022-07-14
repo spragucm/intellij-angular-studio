@@ -51,6 +51,7 @@
         <applicationService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyApplicationService"/>
         <projectService serviceImplementation="com.tcubedstudios.angularstudio.needtosort.services.MyProjectService"/>
         <treeStructureProvider implementation="com.tcubedstudios.angularstudio.angular.navigation.projectview.AngularTreeStructureProvider"/>
+        <toolWindow id="Embedded Web Browser" anchor="right" factoryClass="com.tcubedstudios.angularstudio.browsers.BrowserWindowFactory"/>
     </extensions>
 
     <applicationListeners>
