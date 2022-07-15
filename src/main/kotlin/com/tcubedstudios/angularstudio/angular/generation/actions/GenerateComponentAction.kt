@@ -1,4 +1,4 @@
-package com.tcubedstudios.angularstudio.angular.generation
+package com.tcubedstudios.angularstudio.angular.generation.actions
 
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE

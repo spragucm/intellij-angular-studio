@@ -121,54 +121,343 @@
                 text="Open Angular Template3">
             <add-to-group group-id="EditorContextBarMenu" anchor="first"/>
         </action>
-        <group id="GenerateComponentGroupFromMainMenu" popup="true" text="Angular Gen from Main">
+
+        <!-- Add actions in reverse order from the desired listing in the ProjectViewPopuMenu because anchor="after" results in reversing of order-->
+        <action id="angularStudioCliAddDependencyGenerate"
+                class="org.angular2.cli.actions.AngularCliAddDependencyAction"
+                text="Show Angular Dependency Dialog"
+                description="Show Angular generate dialog (same as 'Angular Dependency...' dialog from Angular Plugin)">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="angularStudioCliGenerate"
+                class="org.angular2.cli.actions.AngularCliGenerateAction"
+                text="Show Angular Generate Dialog"
+                description="Show Angular generate dialog (same as 'Angular Schematics...' dialog from Angular Plugin)">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellDialogAction"
+                text="App-Shell from Dialog"
+                description="Launch dialog to generate an angular app-shell in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellAction"
+                text="App-Shell"
+                description="Generate an angular app-shell in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationDialogAction"
+                text="Application from Dialog"
+                description="Launch dialog to generate an angular application in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationAction"
+                text="Application"
+                description="Generate an angular application in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassModelAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassModelAction"
+                text="Class Model"
+                description="Generate an angular class model in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassDialogAction"
+                text="Class from Dialog"
+                description="Launch dialog to generate an angular class in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassAction"
+                text="Class"
+                description="Generate an angular class in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentDialogAction"
+                text="Component from Dialog"
+                description="Launch dialog to generate an angular component in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <!--<add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="first"/>
+            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
+            <add-to-group group-id="RunContextPopupGroup" anchor="last"/>-->
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentAction"
+                text="Component"
+                description="Generate an angular component in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveDialogAction"
+                text="Directive from Dialog"
+                description="Launch dialog to generate an angular app-shell in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveAction"
+                text="Directive"
+                description="Generate an angular directive in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumDialogAction"
+                text="Enum from Dialog"
+                description="Launch dialog to generate an angular enum in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumAction"
+                text="Enum"
+                description="Generate an angular enum in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardDialogAction"
+                text="Guard from Dialog"
+                description="Launch dialog to generate an angular guard in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardAction"
+                text="Guard"
+                description="Generate an angular guard in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorDialogAction"
+                text="Interceptor from Dialog"
+                description="Launch dialog to generate an angular  in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorAction"
+                text="Interceptor"
+                description="Generate an angular interceptor in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceDialogAction"
+                text="Interface from Dialog"
+                description="Launch dialog to generate an angular interface in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceAction"
+                text="Interface"
+                description="Generate an angular interface in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryDialogAction"
+                text="Library from Dialog"
+                description="Launch dialog to generate an angular library in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryAction"
+                text="Library"
+                description="Generate an angular  in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleDialogAction"
+                text="Module from Dialog"
+                description="Launch dialog to generate an angular module in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleAction"
+                text="Module"
+                description="Generate an angular module in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageModelAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageModelAction"
+                text="PageModel"
+                description="Generate an angular page model in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageDialogAction"
+                text="Page from Dialog"
+                description="Launch dialog to generate an angular page in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageAction"
+                text="Page"
+                description="Generate an angular page in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeDialogAction"
+                text="Pipe from Dialog"
+                description="Launch dialog to generate an angular pipe in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeAction"
+                text="Pipe"
+                description="Generate an angular pipe in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverDialogAction"
+                text="Resolver from Dialog"
+                description="Launch dialog to generate an angular resolver in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverAction"
+                text="Resolver"
+                description="Generate an angular resolver in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceDialogAction"
+                text="Service from Dialog"
+                description="Launch dialog to generate an angular service in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceAction"
+                text="Service"
+                description="Generate an angular service in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerDialogAction"
+                text="Service Worker from Dialog"
+                description="Launch dialog to generate an angular service worker in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerAction"
+                text="Service Worker"
+                description="Generate an angular service worker in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerDialogAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerDialogAction"
+                text="Web Worker from Dialog"
+                description="Launch dialog to generate an angular web worker in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerAction"
+                class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerAction"
+                text="Web Worker"
+                description="Generate an angular web worker in the current directory using options from settings"
+                icon="AngularJSIcons.Angular2">
+            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="AngularStudioGenerateGroup" anchor="after"/>
+        </action>
+
+        <group id="AngularStudioGenerateGroup" popup="true" text="Angular Studio" icon="AngularJSIcons.Angular2">
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateAppShellDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateApplicationDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateClassModelAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateDirectiveDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateEnumDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateGuardDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterceptorDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateInterfaceDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateLibraryDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateModuleDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePageModelAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GeneratePipeDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateResolverDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateServiceWorkerDialogAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerAction"/>
+            <reference id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateWebWorkerDialogAction"/>
+            <separator/>
+            <reference id="angularStudioCliGenerate"/>
+            <reference id="angularStudioCliAddDependencyGenerate"/>
+            <separator/>
             <add-to-group group-id="MainMenu"/>
-        </group>
-        <!--
-            Options we want, and will only show if enabled in settings
-            1. Right-click on a project -> New -> Generate each schematic under the Angular Plugin Options
-                a. Option for gen
-                b. Option for gen and show dialog
-            2. Right-click on a project -> Angular Studio -> Generate each schematic
-                a. Option for gen
-                b. Option for gen and show dialog
-            3. Right-click on a project -> Flat gen options in their own section with dividers
-                a. Option for gen
-                b. Option for gen and show dialog
-        -->
-        <group id="GenerateComponentGroup" popup="true" text="Angular Studio">
-            <action id="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentAction"
-                    class="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentAction"
-                    text="Component"
-                    description="Generate an angular component in the current directory using options from settings"
-                    icon="AngularJSIcons.Angular2">
-            </action>
-
-
             <add-to-group group-id="ToolsMenu"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <add-to-group group-id="NavBarToolBar" anchor="first"/>
             <add-to-group group-id="NewGroup" anchor="after" relative-to-action="angularCliGenerate"/>
         </group>
-        <action id="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentDialogAction"
-                class="com.tcubedstudios.angularstudio.angular.generation.GenerateComponentDialogAction"
-                text="Show Dialog with Options"
-                description="Show dialog with options for generating an angular component">
-            <add-to-group group-id="GenerateComponentGroup"/>
-            <add-to-group group-id="GenerateComponentGroupFromMainMenu"/>
-            <add-to-group group-id="MainToolBar" anchor="last"/>
-            <add-to-group group-id="NavBarToolBar" anchor="first"/>
-            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
-            <add-to-group group-id="RunContextPopupGroup" anchor="last"/>
-            <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="GenerateComponentGroup" anchor="after"/>
-        </action>
-        <action id="angularStudioCliGenerate"
-                class="org.angular2.cli.actions.AngularCliGenerateAction"
-                text="Show Angular Generate Dialog"
-                description="Show Angular generate dialog (same as 'Angular Schematics...' dialog from Angular Plugin)">
-            <add-to-group group-id="GenerateComponentGroup"/>
-        </action>
+
         <!--<action id="com.tcubedstudios.angularstudio.angular.ExpandClassToItsOwnFile"
                 class="com.tcubedstudios.angularstudio.angular.ExpandClassToItsOwnFile"
                 text="Extract inlined style to its own file"
