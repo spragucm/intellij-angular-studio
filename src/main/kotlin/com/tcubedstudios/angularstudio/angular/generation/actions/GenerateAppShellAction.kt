@@ -8,7 +8,7 @@ class GenerateAppShellAction: DumbAwareAction() {
         super.update(event)
     }
 
-    override fun actionPerformed(e: AnActionEvent) {
+    override fun actionPerformed(event: AnActionEvent) {
         
     }
 }
