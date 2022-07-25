@@ -48,6 +48,10 @@
                                  bundle="messages.MyBundle"
                                  groupId="angularstudio.base"
                                  dynamic="true"/>
+        <applicationConfigurable id="com.tcubedstudios.angularstudio.angular.generation.settings.NgGenerateSettingsConfigurable"
+                                 instance="com.tcubedstudios.angularstudio.angular.generation.settings.NgGenerateSettingsConfigurable"
+                                 groupId="angularstudio.base"
+                                 dynamic="true"/>
 
         <treeStructureProvider implementation="com.tcubedstudios.angularstudio.angular.navigation.projectview.AngularTreeStructureProvider"/>
         <toolWindow id="Embedded Web Browser" anchor="right" factoryClass="com.tcubedstudios.angularstudio.browsers.toolwindows.BrowserWindowFactory"/>
