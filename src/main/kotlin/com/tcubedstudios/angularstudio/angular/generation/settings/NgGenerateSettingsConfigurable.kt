@@ -33,6 +33,15 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
     }
 
     private fun createFirstComponent(): JComponent {
+        val splitter = OnePixelSplitter()
+        splitter.firstComponent = createProjectViewComponent()
+        splitter.secondComponent = panel {
+            textRow("Second Comp project:${project.name}", text2)
+        }
+        return splitter
+    }
+
+    private fun createSecondComponent(): JComponent {
         val items: JBList<String> = JBList()
 
 //        val table = TableView()
@@ -44,13 +53,6 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
 //            toolbarDecorator
             textRow("First Comp", text1)
         }
-    }
-
-    private fun createSecondComponent(): JComponent {
-        return createProjectViewComponent()
-        /*return panel {
-            textRow("Second Comp project:${project.name}", text2)
-        }*/
     }
 
     override fun apply() {
