@@ -48,7 +48,7 @@
                                  bundle="messages.MyBundle"
                                  groupId="angularstudio.base"
                                  dynamic="true"/>
-        <applicationConfigurable id="com.tcubedstudios.angularstudio.angular.generation.settings.NgGenerateSettingsConfigurable"
+        <projectConfigurable id="com.tcubedstudios.angularstudio.angular.generation.settings.NgGenerateSettingsConfigurable"
                                  instance="com.tcubedstudios.angularstudio.angular.generation.settings.NgGenerateSettingsConfigurable"
                                  groupId="angularstudio.base"
                                  dynamic="true"/>

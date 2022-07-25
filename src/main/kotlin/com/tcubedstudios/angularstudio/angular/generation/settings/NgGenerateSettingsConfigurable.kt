@@ -1,7 +1,9 @@
 package com.tcubedstudios.angularstudio.angular.generation.settings
 
+import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.project.Project
 import com.intellij.ui.OnePixelSplitter
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.components.JBList
@@ -10,7 +12,7 @@ import com.tcubedstudios.angularstudio.shared.utils.textRow
 import javax.swing.JComponent
 import kotlin.reflect.KMutableProperty0
 
-class NgGenerateSettingsConfigurable: Configurable {
+class NgGenerateSettingsConfigurable(private val project: Project): Configurable {
 
     val propertyGraph = PropertyGraph()
     var text1 = propertyGraph.property("Text 1")
@@ -45,9 +47,10 @@ class NgGenerateSettingsConfigurable: Configurable {
     }
 
     private fun createSecondComponent(): JComponent {
-        return panel {
-            textRow("Second Comp", text2)
-        }
+        return createProjectViewComponent()
+        /*return panel {
+            textRow("Second Comp project:${project.name}", text2)
+        }*/
     }
 
     override fun apply() {
@@ -56,5 +59,12 @@ class NgGenerateSettingsConfigurable: Configurable {
 
     override fun reset() {
 
+    }
+
+    //TODO - CHRIS - it would be nice to have this as a generic tree component that
+    //can have items selected and then the selected item passed to some other logic
+    //for processing
+    private fun createProjectViewComponent(): JComponent {
+        return ProjectViewPane(project).createComponent()
     }
 }
