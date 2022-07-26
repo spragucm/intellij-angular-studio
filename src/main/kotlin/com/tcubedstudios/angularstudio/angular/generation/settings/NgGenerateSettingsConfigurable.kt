@@ -2,17 +2,21 @@ package com.tcubedstudios.angularstudio.angular.generation.settings
 
 import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.openapi.observable.properties.PropertyGraph
+import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.DialogPanel
+import com.intellij.openapi.util.Disposer
 import com.intellij.ui.OnePixelSplitter
-import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.components.JBList
 import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.tabs.TabInfo
+import com.intellij.ui.tabs.impl.SingleHeightTabs
 import com.tcubedstudios.angularstudio.shared.utils.textRow
 import javax.swing.JComponent
-import kotlin.reflect.KMutableProperty0
 
-class NgGenerateSettingsConfigurable(private val project: Project): Configurable {
+//TODO - CHRIS - Would a BoundSearchableConfigurable be better?
+class NgGenerateSettingsConfigurable(private val project: Project): Configurable { //BoundConfigurable("Angular Studio Settings :)") {
 
     val propertyGraph = PropertyGraph()
     var text1 = propertyGraph.property("Text 1")
@@ -25,11 +29,49 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
     // TODO - CHRIS - revisit when this should and shouldn't be true
     override fun isModified(): Boolean = false
 
-    override fun createComponent(): JComponent? {
-        val splitter = OnePixelSplitter()
-        splitter.firstComponent = createFirstComponent()
-        splitter.secondComponent = createSecondComponent()
-        return splitter
+    //TODO - CHRIS - this should be handled somewhere smart
+    private val uiDisposable = Disposer.newDisposable()
+
+    override fun createComponent(): JComponent {
+        val splitter1 = OnePixelSplitter()
+        splitter1.firstComponent = createFirstComponent()
+        splitter1.secondComponent = createSecondComponent()
+        val splitter1Tab = TabInfo(splitter1).apply {
+            text = "Schemas"
+            sideComponent = splitter1
+        }
+
+        val splitter2 = OnePixelSplitter()
+        splitter2.firstComponent = createFirstComponent()
+        splitter2.secondComponent = createSecondComponent()
+        val splitter2Tab = TabInfo(splitter2).apply {
+            text = "NgGenerate Settings"
+            sideComponent = splitter2
+        }
+
+        val splitter3 = OnePixelSplitter()
+        splitter3.firstComponent = createFirstComponent()
+        splitter3.secondComponent = createSecondComponent()
+        val splitter3Tab = TabInfo(splitter3).apply {
+            text = "Bulk Generator"
+            sideComponent = splitter3
+        }
+
+        val tabs = object : SingleHeightTabs(project, uiDisposable) {
+            override fun adjust(each: TabInfo?) = Unit
+        }.apply {
+            addTab(splitter1Tab)
+            addTab(splitter2Tab)
+            addTab(splitter3Tab)
+        }
+
+        return tabs
+        /*return panel {
+            row {
+                Cell
+                splitter1
+            }
+        }*/
     }
 
     private fun createFirstComponent(): JComponent {
