@@ -1,23 +1,31 @@
 package com.tcubedstudios.angularstudio.angular.generation.settings
 
 import com.intellij.ide.projectView.impl.ProjectViewPane
+import com.intellij.openapi.keymap.KeymapUtil
 import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.util.Disposer
 import com.intellij.ui.OnePixelSplitter
 import com.intellij.ui.components.JBList
+import com.intellij.ui.components.panels.Wrapper
 import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.layout.applyToComponent
+import com.intellij.ui.layout.cellPanel
 import com.intellij.ui.tabs.TabInfo
 import com.intellij.ui.tabs.TabsListener
 import com.intellij.ui.tabs.impl.SingleHeightTabs
+import com.intellij.util.ui.UIUtil
 import com.tcubedstudios.angularstudio.shared.utils.textRow
+import javax.swing.JButton
 import javax.swing.JComponent
+import javax.swing.JTextArea
 
 //TODO - CHRIS - Would a BoundSearchableConfigurable be better?
-class NgGenerateSettingsConfigurable(private val project: Project): Configurable { //BoundConfigurable("Angular Studio Settings :)") {
+class NgGenerateSettingsConfigurable(private val project: Project): BoundConfigurable("Angular Studio Settings :)") {
 
     val propertyGraph = PropertyGraph()
     var text1 = propertyGraph.property("Text 1")
@@ -30,10 +38,7 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
     // TODO - CHRIS - revisit when this should and shouldn't be true
     override fun isModified(): Boolean = false
 
-    //TODO - CHRIS - this should be handled somewhere smart
-    private val uiDisposable = Disposer.newDisposable()
-
-    override fun createComponent(): JComponent {
+    override fun createPanel(): DialogPanel {
         val splitter1 = OnePixelSplitter()
         splitter1.firstComponent = createFirstComponent()
         splitter1.secondComponent = createSecondComponent()
@@ -58,7 +63,7 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
             sideComponent = splitter3
         }
 
-        val tabs = object : SingleHeightTabs(project, uiDisposable) {
+        val tabs = object : SingleHeightTabs(project, disposable!!) {
             override fun adjust(each: TabInfo?) = Unit
         }.apply {
             addTab(splitter1Tab)
@@ -74,13 +79,11 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
         }
         tabs.addListener(listener)
 
-        return tabs
-        /*return panel {
-            row {
-                Cell
-                splitter1
+        return panel {
+            row("Repository:") {
+                cell(tabs)
             }
-        }*/
+        }
     }
 
     private fun createFirstComponent(): JComponent {
@@ -89,7 +92,11 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
         splitter.secondComponent = panel {
             textRow("Second Comp project:${project.name}", text2)
         }
-        return splitter
+
+        return Wrapper(splitter).apply {
+            isOpaque = true
+            background = UIUtil.getListBackground()
+        }
     }
 
     private fun createSecondComponent(): JComponent {
@@ -118,6 +125,8 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
     //can have items selected and then the selected item passed to some other logic
     //for processing
     private fun createProjectViewComponent(): JComponent {
-        return ProjectViewPane(project).createComponent()
+        return ProjectViewPane(project).createComponent().also {
+
+        }
     }
 }
