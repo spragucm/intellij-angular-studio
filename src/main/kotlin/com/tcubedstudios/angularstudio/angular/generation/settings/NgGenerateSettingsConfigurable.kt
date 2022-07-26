@@ -11,6 +11,7 @@ import com.intellij.ui.OnePixelSplitter
 import com.intellij.ui.components.JBList
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.tabs.TabInfo
+import com.intellij.ui.tabs.TabsListener
 import com.intellij.ui.tabs.impl.SingleHeightTabs
 import com.tcubedstudios.angularstudio.shared.utils.textRow
 import javax.swing.JComponent
@@ -64,6 +65,14 @@ class NgGenerateSettingsConfigurable(private val project: Project): Configurable
             addTab(splitter2Tab)
             addTab(splitter3Tab)
         }
+
+
+        val listener = object : TabsListener {
+            override fun selectionChanged(oldSelection: TabInfo?, newSelection: TabInfo?) {
+                println("Changed tab from ${oldSelection?.text} to ${newSelection?.text}")
+            }
+        }
+        tabs.addListener(listener)
 
         return tabs
         /*return panel {
