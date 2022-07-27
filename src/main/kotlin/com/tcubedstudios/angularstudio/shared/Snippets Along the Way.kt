@@ -26,4 +26,24 @@ val indicatorsProvider = ProgressIndicatorsProvider().also {
     Disposer.register(disposable!!, it)
 }*/
 
+/*
+Extension Points
+    <extensionPoints>
+        <extensionPoint name="someExtensionPointName" interface="com.tcubedstudios.angularstudio.angular.projectview.scope.IAngularStudioScopesProvider" area="IDEA_PROJECT" dynamic="true"/>
+    </extensionPoints>
+    <extensions>
+        <someExtensionPointName implementation="the class package"/>
+    </extensions>
 
+Open Files
+    - look at OpenFilesScope
+
+
+
+
+
+
+
+
+
+ */

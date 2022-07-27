@@ -29,10 +29,6 @@
     <depends>org.jetbrains.plugins.sass</depends>
     <depends>AngularJS</depends>
 
-    <extensionPoints>
-        <extensionPoint name="angularStudioScopesProvider" interface="com.tcubedstudios.angularstudio.angular.projectview.scope.IAngularStudioScopesProvider" area="IDEA_PROJECT" dynamic="true"/>
-    </extensionPoints>
-
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable id="angularstudio.base"
                                  instance="com.tcubedstudios.angularstudio.shared.settings.AngularStudioSettingsConfigurable"
@@ -59,8 +55,6 @@
 
         <treeStructureProvider implementation="com.tcubedstudios.angularstudio.angular.navigation.projectview.AngularTreeStructureProvider"/>
         <toolWindow id="Embedded Web Browser" anchor="right" factoryClass="com.tcubedstudios.angularstudio.browsers.toolwindows.BrowserWindowFactory"/>
-
-        <!--<angularStudioScopesProvider implementation="com.tcubedstudios.angularstudio.angular.projectview.scope.AngularStudioScopesProvider"/>-->
 
         <customScopesProvider implementation="com.tcubedstudios.angularstudio.angular.projectview.scope.AngularStudioScopesProvider" order="last"/>
     </extensions>
