@@ -2,10 +2,8 @@ package com.tcubedstudios.angularstudio.angular.settings
 
 import javax.swing.JComponent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import com.intellij.openapi.observable.properties.PropertyGraph
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.ui.DialogPanel
-import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.SimpleListCellRenderer
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
@@ -28,16 +26,13 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 
     private val settings: NewWorkspaceSettings
         get() {
-            return NewWorkspaceSettings.getInstance().state
+            return NewWorkspaceSettings.getInstance()
         }
 
-    private var newWorkspaceSettings = NewWorkspaceSettings.getInstance()
-    //private var newWorkspaceSettingsState = newWorkspaceSettings.state
-
-    private val propertyGraph = PropertyGraph()
-
-    private var sourceRootPath: String = ""
-    private lateinit var pathField: TextFieldWithBrowseButton
+    private val state: NewWorkspaceSettingsState
+        get() {
+            return settings.state
+        }
 
     val alarm = Alarm {}
 
@@ -74,7 +69,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 //        browserLink(IdeBundle.message("date.format.date.patterns"), "https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html"
         panel = panel {
             group {
-                textRow("Workspace Name", settings::workspaceName)
+                textRow("Workspace Name", state::workspaceName)
 //                row("Workspace Name12") {
 //                    textField()
 //                        .bindText(settings::workspaceName)//
@@ -109,7 +104,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                     newWorkspaceSettings.state.workspaceName = it.get()
                     return@textRow true
                 }*/
-                checkBoxRow("Force", settings::force)
+                checkBoxRow("Force", state::force)
             }
             collapsibleGroup("Standard Settings") {
                 row("Workspace Template") {
@@ -124,7 +119,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                         null
                     )
                         .horizontalAlign(HorizontalAlign.FILL)
-                        .bindText(settings::workspacePath)//.toUiPathProperty()
+                        .bindText(state::workspacePath)//.toUiPathProperty()
 //                        .onIsModified {
 //                            //TODO - CHRIS
 //                            return@onIsModified true
@@ -136,38 +131,38 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                     comboBox(getPackageJsonTemplates(), SimpleListCellRenderer.create("") { it.first })
                         .horizontalAlign(HorizontalAlign.FILL)
                 }
-                checkBoxRow("Replace entire package.json with template", settings::replaceEntireJsonWithTemplate)
-                checkBoxRow("Create Worksapce InWorkingDirectory", settings::createWorkspaceInWorkingDirectory)
-                checkBoxRow("Is Mono Repo", settings::isMonoRepo)
-                textRow("Prefix", settings::prefix)
-                checkBoxRow("Routing", settings::routing)
-                checkBoxRow("Strict", settings::strict)
-                comboBoxRow("Style", settings::style, Style::class.java)
+                checkBoxRow("Replace entire package.json with template", state::replaceEntireJsonWithTemplate)
+                checkBoxRow("Create Worksapce InWorkingDirectory", state::createWorkspaceInWorkingDirectory)
+                checkBoxRow("Is Mono Repo", state::isMonoRepo)
+                textRow("Prefix", state::prefix)
+                checkBoxRow("Routing", state::routing)
+                checkBoxRow("Strict", state::strict)
+                comboBoxRow("Style", state::style, Style::class.java)
             }
             collapsibleGroup("Advanced Settings") {
-                checkBoxRow("Inline Style", settings::inlineStyle)
-                checkBoxRow("Inline Template", settings::inlineTemplate)
-                textRow("New ProjectRoot", settings::newProjectRoot)
-                comboBoxRow("Package Manager", settings::packageManager, PackageManager::class.java)
-                textRow("Directory Name", settings::directoryName)
-                checkBoxRow("Skip Git", settings::skipGit)
-                checkBoxRow("Skip Tests", settings::skipTests)
-                checkBoxRow("Clean Install", settings::cleanInstall)
+                checkBoxRow("Inline Style", state::inlineStyle)
+                checkBoxRow("Inline Template", state::inlineTemplate)
+                textRow("New ProjectRoot", state::newProjectRoot)
+                comboBoxRow("Package Manager", state::packageManager, PackageManager::class.java)
+                textRow("Directory Name", state::directoryName)
+                checkBoxRow("Skip Git", state::skipGit)
+                checkBoxRow("Skip Tests", state::skipTests)
+                checkBoxRow("Clean Install", state::cleanInstall)
             }
             collapsibleGroup("Obscure Settings") {
-                checkBoxRow("Defaults", settings::defaults)
-                checkBoxRow("Dry Run", settings::dryRun)
-                textRow("Collection", settings::collection)
-                checkBoxRow("Commit", settings::commit)
-                checkBoxRow("Interactive", settings::interactive)
-                checkBoxRow("Minimal", settings::minimal)
-                checkBoxRow("Skip Install", settings::skipInstall)
-                checkBoxRow("Verbose", settings::verbose)
-                comboBoxRow("View Encapsulation", settings::viewEncapsulation, ViewEncapsulation::class.java)
-                checkBoxRow("Show Critical Dialogs", settings::showCriticalDialogs)
-                checkBoxRow("Show Standard Dialogs", settings::showStandardDialogs)
-                checkBoxRow("Show Advanced Dialogs", settings::showAdvancedDialogs)
-                checkBoxRow("Show Obscure Dialogs", settings::showObscureDialogs)
+                checkBoxRow("Defaults", state::defaults)
+                checkBoxRow("Dry Run", state::dryRun)
+                textRow("Collection", state::collection)
+                checkBoxRow("Commit", state::commit)
+                checkBoxRow("Interactive", state::interactive)
+                checkBoxRow("Minimal", state::minimal)
+                checkBoxRow("Skip Install", state::skipInstall)
+                checkBoxRow("Verbose", state::verbose)
+                comboBoxRow("View Encapsulation", state::viewEncapsulation, ViewEncapsulation::class.java)
+                checkBoxRow("Show Critical Dialogs", state::showCriticalDialogs)
+                checkBoxRow("Show Standard Dialogs", state::showStandardDialogs)
+                checkBoxRow("Show Advanced Dialogs", state::showAdvancedDialogs)
+                checkBoxRow("Show Obscure Dialogs", state::showObscureDialogs)
             }.bottomGap(BottomGap.SMALL)
         }
 
@@ -233,10 +228,12 @@ class NewWorkspaceSettingsConfigurable: Configurable {
     override fun isModified(): Boolean= false
 
     override fun apply() {
-//        newWorkspaceSettings.loadState(newWorkspaceSettingsState)
+        val bla = state
+        //settings.loadState(state)
     }
 
     override fun reset() {
-//        newWorkspaceSettingsForm.newWorkspaceSettingsState = newWorkspaceSettings.state
+        val bla = state
+//        newWorkspaceSettingsForm.newWorkspaceSettingsState = settings.state
     }
 }
