@@ -34,9 +34,15 @@ class NewWorkspaceSettingsConfigurable: Configurable {
             return settings.state
         }
 
+    //TODO - CHRIS - this disposable needs a parent
+    //Maybe this is useful: createExtensionDisposable()
     val alarm = Alarm {}
 
     private lateinit var panel: DialogPanel
+
+    //TODO - CHRIS - what is this being used for?
+    //I think that it causes the the fields to be bound to settings so that the fields
+    //don't have to wait on some other triggers (ie it's auto saving every 5 secs)
     private fun initValidation() {
         alarm.addRequest(Runnable {
             panel.apply()
@@ -227,13 +233,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
 
     override fun isModified(): Boolean= false
 
-    override fun apply() {
-        val bla = state
-        //settings.loadState(state)
-    }
+    override fun apply() {}
 
-    override fun reset() {
-        val bla = state
-//        newWorkspaceSettingsForm.newWorkspaceSettingsState = settings.state
-    }
+    override fun reset() {}
 }

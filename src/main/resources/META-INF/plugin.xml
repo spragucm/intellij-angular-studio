@@ -53,6 +53,13 @@
                                  groupId="angularstudio.base"
                                  dynamic="true"/>
 
+        <applicationService serviceImplementation="com.tcubedstudios.angularstudio.projectview.folding.settings.ProjectViewFoldingSettings"/>
+        <projectConfigurable id="angularstudio.projectviewfolding"
+                                 instance="com.tcubedstudios.angularstudio.projectview.folding.settings.ProjectViewFoldingConfigurable"
+                                 bundle="messages.MyBundle"
+                                 groupId="angularstudio.base"
+                                 dynamic="true"/>
+
         <treeStructureProvider implementation="com.tcubedstudios.angularstudio.angular.navigation.projectview.AngularTreeStructureProvider"/>
         <toolWindow id="Embedded Web Browser" anchor="right" factoryClass="com.tcubedstudios.angularstudio.browsers.toolwindows.BrowserWindowFactory"/>
 
