@@ -1,32 +1,22 @@
 package com.tcubedstudios.angularstudio.projectview.folding.settings
 
-import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.impl.AbstractProjectTreeStructure
+import com.intellij.ide.projectView.impl.ProjectViewPane
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.SearchableConfigurable
-import com.intellij.openapi.ui.DialogPanel
-import com.intellij.ui.dsl.builder.panel
-import com.intellij.util.Alarm
-import javax.swing.JComponent
-import com.intellij.ide.projectView.impl.ProjectViewPane
-import com.intellij.openapi.application.ApplicationBundle
 import com.intellij.openapi.project.Project
-import com.intellij.ui.ContextHelpLabel
-import com.intellij.ui.DocumentAdapter
-import com.intellij.ui.IdeUICustomization
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.OnePixelSplitter
-import com.intellij.ui.dsl.builder.Panel
-import com.intellij.ui.dsl.builder.RightGap
-import com.intellij.ui.dsl.builder.toMutableProperty
+import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.layout.ComponentPredicate
+import com.intellij.util.Alarm
 import com.intellij.util.ui.tree.TreeUtil
-import javax.swing.BorderFactory.createEmptyBorder
-import com.intellij.ui.layout.*
-import com.tcubedstudios.angularstudio.MyBundle
 import com.tcubedstudios.angularstudio.MyBundle.message
+import com.tcubedstudios.angularstudio.shared.utils.checkBoxExt
 import com.tcubedstudios.angularstudio.shared.utils.checkBoxRow
-import javax.swing.JTextField
-import javax.swing.event.DocumentEvent
+import javax.swing.BorderFactory.createEmptyBorder
+import javax.swing.JComponent
 
 class ProjectViewFoldingConfigurable(private val project: Project): SearchableConfigurable {
 
@@ -98,59 +88,53 @@ class ProjectViewFoldingConfigurable(private val project: Project): SearchableCo
         settingsInputComponent = panel {
             group {
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.foldingEnabled"),
+                    checkBoxText = message("projectViewFolding.settings.foldingEnabled"),
                     property = state::foldingEnabled,
                     comment = message("projectViewFolding.settings.foldingEnabled.comment"),
                     mnemonic = 'e',
-                    componentPredicate = { foldingEnabledPredicate = it },
-                    isTextRowLabel = false
+                    componentPredicate = { foldingEnabledPredicate = it }
                 )
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.foldDirectories"),
+                    checkBoxText = message("projectViewFolding.settings.foldDirectories"),
                     property = state::foldDirectories,
                     comment = message("projectViewFolding.settings.foldDirectories.comment"),
                     enableIf = foldingEnabledPredicate,
-                    mnemonic ='d',
-                    isTextRowLabel = false
+                    mnemonic ='d'
                 )
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.foldIgnoredFiles"),
+                    checkBoxText = message("projectViewFolding.settings.foldIgnoredFiles"),
                     property = state::hideIgnoredFiles,
                     comment = message("projectViewFolding.settings.foldIgnoredFiles.comment"),
                     enableIf = foldingEnabledPredicate,
-                    mnemonic = 'h',
-                    isTextRowLabel = false
+                    mnemonic = 'h'
                 )
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.hideEmptyGroups"),
+                    checkBoxText = message("projectViewFolding.settings.hideEmptyGroups"),
                     property = state::hideEmptyGroups,
                     comment = message("projectViewFolding.settings.hideEmptyGroups.comment"),
                     enableIf = foldingEnabledPredicate,
-                    mnemonic = 'h',
-                    isTextRowLabel = false
+                    mnemonic = 'h'
                 )
                     /*.apply {
                     // TODO - CHRIS
                     // hideAllGroupsPropert.afterPropagation { enabled = !hideAllGroupsProperty.get() }
                 }*/
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.hideAllGroups"),
+                    checkBoxText = message("projectViewFolding.settings.hideAllGroups"),
                     property = state::hideAllGroups,
                     comment = message("projectViewFolding.settings.hideAllGroups.comment"),
                     enableIf = foldingEnabledPredicate,
                     mnemonic = 'i',
                     helpTitle = message("projectViewFolding.settings.hideAllGroups.help"),
-                    helpDescription = message("projectViewFolding.settings.hideAllGroups.help.description"),
-                    isTextRowLabel = false
+                    helpDescription = message("projectViewFolding.settings.hideAllGroups.help.description")
                 )
 
                 checkBoxRow(
-                    text = message("projectViewFolding.settings.caseInsensitive"),
+                    checkBoxText = message("projectViewFolding.settings.caseInsensitive"),
                     property = state::caseInsensitive,
                     comment = message("projectViewFolding.settings.caseInsensitive.comment"),
                     enableIf = foldingEnabledPredicate,
-                    mnemonic = 'c',
-                    isTextRowLabel = false
+                    mnemonic = 'c'
                 )
             }
             group(message("projectViewFolding.settings.foldingRules"))  {

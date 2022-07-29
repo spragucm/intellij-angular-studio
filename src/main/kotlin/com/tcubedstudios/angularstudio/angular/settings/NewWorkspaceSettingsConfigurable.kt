@@ -110,7 +110,7 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                     newWorkspaceSettings.state.workspaceName = it.get()
                     return@textRow true
                 }*/
-                checkBoxRow("Force", state::force)
+                checkBoxRow(state::force, "Force")
             }
             collapsibleGroup("Standard Settings") {
                 row("Workspace Template") {
@@ -137,38 +137,38 @@ class NewWorkspaceSettingsConfigurable: Configurable {
                     comboBox(getPackageJsonTemplates(), SimpleListCellRenderer.create("") { it.first })
                         .horizontalAlign(HorizontalAlign.FILL)
                 }
-                checkBoxRow("Replace entire package.json with template", state::replaceEntireJsonWithTemplate)
-                checkBoxRow("Create Worksapce InWorkingDirectory", state::createWorkspaceInWorkingDirectory)
-                checkBoxRow("Is Mono Repo", state::isMonoRepo)
+                checkBoxRow(state::replaceEntireJsonWithTemplate, "Replace entire package.json with template")
+                checkBoxRow(state::createWorkspaceInWorkingDirectory, "Create Worksapce InWorkingDirectory")
+                checkBoxRow(state::isMonoRepo, "Is Mono Repo")
                 textRow("Prefix", state::prefix)
-                checkBoxRow("Routing", state::routing)
-                checkBoxRow("Strict", state::strict)
+                checkBoxRow(state::routing, "Routing")
+                checkBoxRow(state::strict, "Strict")
                 comboBoxRow("Style", state::style, Style::class.java)
             }
             collapsibleGroup("Advanced Settings") {
-                checkBoxRow("Inline Style", state::inlineStyle)
-                checkBoxRow("Inline Template", state::inlineTemplate)
+                checkBoxRow(state::inlineStyle, "Inline Style")
+                checkBoxRow(state::inlineTemplate, "Inline Template")
                 textRow("New ProjectRoot", state::newProjectRoot)
                 comboBoxRow("Package Manager", state::packageManager, PackageManager::class.java)
                 textRow("Directory Name", state::directoryName)
-                checkBoxRow("Skip Git", state::skipGit)
-                checkBoxRow("Skip Tests", state::skipTests)
-                checkBoxRow("Clean Install", state::cleanInstall)
+                checkBoxRow(state::skipGit, "Skip Git")
+                checkBoxRow(state::skipTests, "Skip Tests")
+                checkBoxRow(state::cleanInstall, "Clean Install")
             }
             collapsibleGroup("Obscure Settings") {
-                checkBoxRow("Defaults", state::defaults)
-                checkBoxRow("Dry Run", state::dryRun)
+                checkBoxRow(state::defaults, "Defaults")
+                checkBoxRow(state::dryRun, "Dry Run")
                 textRow("Collection", state::collection)
-                checkBoxRow("Commit", state::commit)
-                checkBoxRow("Interactive", state::interactive)
-                checkBoxRow("Minimal", state::minimal)
-                checkBoxRow("Skip Install", state::skipInstall)
-                checkBoxRow("Verbose", state::verbose)
+                checkBoxRow(state::commit, "Commit")
+                checkBoxRow(state::interactive, "Interactive")
+                checkBoxRow(state::minimal, "Minimal")
+                checkBoxRow(state::skipInstall, "Skip Install")
+                checkBoxRow(state::verbose, "Verbose")
                 comboBoxRow("View Encapsulation", state::viewEncapsulation, ViewEncapsulation::class.java)
-                checkBoxRow("Show Critical Dialogs", state::showCriticalDialogs)
-                checkBoxRow("Show Standard Dialogs", state::showStandardDialogs)
-                checkBoxRow("Show Advanced Dialogs", state::showAdvancedDialogs)
-                checkBoxRow("Show Obscure Dialogs", state::showObscureDialogs)
+                checkBoxRow(state::showCriticalDialogs, "Show Critical Dialogs")
+                checkBoxRow(state::showStandardDialogs, "Show Standard Dialogs")
+                checkBoxRow(state::showAdvancedDialogs, "Show Advanced Dialogs")
+                checkBoxRow(state::showObscureDialogs, "Show Obscure Dialogs")
             }.bottomGap(BottomGap.SMALL)
         }
 

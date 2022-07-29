@@ -9,6 +9,7 @@ import com.intellij.openapi.observable.properties.GraphProperty
 import com.intellij.openapi.options.ex.Settings
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.ui.ContextHelpLabel
+import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.dsl.builder.*
 import com.intellij.ui.dsl.gridLayout.HorizontalAlign
 import com.intellij.ui.layout.ComponentPredicate
@@ -39,8 +40,9 @@ import kotlin.reflect.KMutableProperty0
 }*/
 
 fun Panel.checkBoxRow(
-    text: String,
     property: KMutableProperty0<Boolean>,
+    labelText: String? = null,
+    checkBoxText: String? = null,
     comment: String? = null,
     enableIf: ComponentPredicate? = null,
     mnemonic: Char? = null,
@@ -49,27 +51,49 @@ fun Panel.checkBoxRow(
     horizontalAlign: HorizontalAlign = HorizontalAlign.LEFT,
     componentPredicate: ((ComponentPredicate) -> Unit)? = null,
     helpTitle: String? = null,
-    helpDescription: String? = null,
-    isTextRowLabel: Boolean = true
+    helpDescription: String? = null
 ): Row {
-    val rowText = if (isTextRowLabel) text else ""
-    val checkBoxText = if (isTextRowLabel) "" else text
+    val text = checkBoxText ?: ""
 
-    return row(rowText) {
-        checkBox(checkBoxText).apply {
-            //TODO - CHRIS - this is from a migration and might not be useful anymore
-            //with kotlin dsl components
-            //withSelectedBinding(property.toBinding())
-            bindSelected(property)
-            onModified?.let { onIsModified { onModified.invoke(property) } }
-            horizontalAlign(horizontalAlign)
-            comment(comment, commentMaxLineLength)
-            mnemonic?.let { applyToComponent { setMnemonic(it) } }
-            componentPredicate?.invoke(selected)
-            enableIf?.let { enabledIf(it) }
+    //The following is necessary because passing empty into row results in IDE warnings as well as significantly more left padding
+    return when {
+        labelText != null -> {
+            row(labelText) {
+                checkBoxExt(text, property, comment, enableIf, mnemonic, commentMaxLineLength, onModified, horizontalAlign, componentPredicate)
+                helpIconWithPopup(helpTitle, helpDescription)
+            }
         }
+        else -> {
+            row {
+                checkBoxExt(text, property, comment, enableIf, mnemonic, commentMaxLineLength, onModified, horizontalAlign, componentPredicate)
+                helpIconWithPopup(helpTitle, helpDescription)
+            }
+        }
+    }
+}
 
-        helpIconWithPopup(helpTitle, helpDescription)
+fun Row.checkBoxExt(
+    text: String,
+    property: KMutableProperty0<Boolean>,
+    comment: String? = null,
+    enableIf: ComponentPredicate? = null,
+    mnemonic: Char? = null,
+    commentMaxLineLength: Int = -1,
+    onModified: ((KMutableProperty0<Boolean>) -> Boolean)? = null,
+    horizontalAlign: HorizontalAlign = HorizontalAlign.LEFT,
+    componentPredicate: ((ComponentPredicate) -> Unit)? = null
+): Cell<JBCheckBox> {
+    return checkBox(text).apply {
+        //TODO - CHRIS - this is from a migration and might not be useful anymore
+        //with kotlin dsl components
+        //withSelectedBinding(property.toBinding())
+        bindSelected(property)
+        onModified?.let { onIsModified { onModified.invoke(property) } }
+        horizontalAlign(horizontalAlign)
+        comment(comment, commentMaxLineLength)
+        mnemonic?.let { applyToComponent { setMnemonic(it) } }
+        componentPredicate?.invoke(selected)
+        enableIf?.let { enabledIf(it) }
     }
 }
 
@@ -231,7 +255,7 @@ fun Row.helpIconWithPopup (
     //      cell(ContextHelpLabel.create(helpTitle, helpDescription))       Cell<ContextHelpLabel>
     //      contextHelp(helpTitle, helpDescription)                         Cell<JLabel>
     return when {
-        title != null && description != null -> contextHelp(title, description)
+        title != null && description != null -> contextHelp(description, title)
         description != null -> contextHelp(description)
         else -> null
     }
