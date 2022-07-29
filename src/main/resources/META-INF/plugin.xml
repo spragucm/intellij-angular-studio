@@ -244,9 +244,9 @@
             <keyboard-shortcut
                     keymap="$default"
                     first-keystroke="shift alt C"/>
-            <mouse-shortcut
+            <!--<mouse-shortcut
                     keymap="$default"
-                    keystroke="control button3 longClick"/>
+                    keystroke="control button3 longClick"/>-->
         </action>
         <action id="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentModelAction"
                 class="com.tcubedstudios.angularstudio.angular.generation.actions.GenerateComponentModelAction"

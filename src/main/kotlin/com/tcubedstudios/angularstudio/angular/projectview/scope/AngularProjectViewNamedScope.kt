@@ -7,12 +7,13 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.search.scope.packageSet.AbstractPackageSet
 import com.intellij.psi.search.scope.packageSet.NamedScope
 import com.intellij.psi.search.scope.packageSet.NamedScopesHolder
+import com.tcubedstudios.angularstudio.MyBundle
 import icons.AngularJSIcons
 
 object AngularProjectViewNamedScope: NamedScope(
     "Angular Studio",
     AngularJSIcons.Angular2,
-    object : AbstractPackageSet(IdeBundle.message("angular.studio.scope.title")) {
+    object : AbstractPackageSet(MyBundle.message("angular.studio.scope.title")) {
         override fun contains(file: VirtualFile, project: Project, holder: NamedScopesHolder?): Boolean {
             return true
         }
