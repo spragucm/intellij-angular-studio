@@ -67,6 +67,23 @@
     </extensions>
 
     <actions>
+        <!-- Project Folding -->
+        <action id="com.tcubedstudios.angularstudio.projectview.folding.actions.IgnoredFilesAction"
+                class="com.tcubedstudios.angularstudio.projectview.folding.actions.IgnoredFilesAction"
+                text="Fold Ignored Files"
+                description="Action that lets you fold the ignored files">
+            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"
+                          relative-to-action="ProjectView.FlattenPackages"
+                          anchor="before"/>
+        </action>
+        <action id="com.tcubedstudios.angularstudio.projectview.folding.actions.FoldRootFiles"
+                class="com.tcubedstudios.angularstudio.projectview.folding.actions.RootFilesAction"
+                text="Fold Root Files"
+                description="Action that lets you fold the files located in the root of your project">
+            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"
+                          relative-to-action="com.tcubedstudios.angularstudio.projectview.folding.actions.IgnoredFilesAction"
+                          anchor="before"/>
+        </action>
         <!-- Terminal -->
         <action id="com.tcubedstudios.angularstudio.terminal.actions.OpenTerminal"
                 class="com.tcubedstudios.angularstudio.terminal.actions.OpenProjectDirectoryAction"
