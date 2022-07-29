@@ -39,9 +39,18 @@ Open Files
     - look at OpenFilesScope
 
 
+UI Elements
+    - Create invisible box of specified size
+        Box.createRigidArea(JBUI.size(5, 0))
 
+    - Add help icon with popup (doesn't seem to work) wit kotlin dsl
+        add(ContextHelpLabel.create("errrrrrr"))
 
+    - applyToComponent vs apply: apply is native kotlin for applying to the same object it's called on.
+        I think applyToComponent is the same idea, but it's called on a Cell containing the component that
+        is the actual taret of the apply call
 
+    - Row dsl class has a ton of useful builder methods
 
 
 
