@@ -1,5 +1,6 @@
 package com.tcubedstudios.angularstudio.projectview.folding.settings
 
+import com.intellij.find.impl.JComboboxAction.Companion.emptyText
 import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.impl.AbstractProjectTreeStructure
 import com.intellij.ide.projectView.impl.ProjectViewPane
@@ -8,7 +9,9 @@ import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogPanel
 import com.intellij.ui.OnePixelSplitter
+import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
+import com.intellij.ui.layout.CCFlags
 import com.intellij.ui.layout.ComponentPredicate
 import com.intellij.util.Alarm
 import com.intellij.util.ui.tree.TreeUtil
@@ -141,13 +144,31 @@ class ProjectViewFoldingConfigurable(private val project: Project): SearchableCo
                 row {
                     expandableTextField()
                         .label("Expandable text")
+                        .apply {
+                            bindText(state::patterns)
+                            //emptyText(message("projectViewFolding.settings.patterns"))
+                            comment(message("projectViewFolding.settings.patterns.comment"))
+
+                            enabledIf(foldingEnabledPredicate)
+                        }
+                        //.constraints(CCFlags.growX)
                         .applyToComponent {
-                            text = "some tset alksdjflak sjdfla jskdjfalksdjfas jdkfja"
+                            emptyText.text = message("projectViewFolding.settings.patterns")
+                            //text = "some tset alksdjflak sjdfla jskdjfalksdjfas jdkfja"
                             /*document.addDocumentListener(object: DocumentAdapter() {
                                 override fun textChanged(e: DocumentEvent) {
                                     settings.ADDITIONAL_TAGS = text.trim()
                                 }
                             })*/
+
+                            /*expandableTextField(patternsProperty)
+                                .withTextBinding(settings::patterns.toNullableBinding(""))
+                                .comment(message("projectViewFolding.settings.patterns.comment"), -1)
+                                .constraints(CCFlags.growX)
+                                .applyToComponent {
+                                    emptyText.text = message("projectViewFolding.settings.patterns")
+                                }
+                                .enableIf(foldingEnabledPredicate)*/
                         }
                 }
             }
