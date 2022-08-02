@@ -64,6 +64,8 @@
         <toolWindow id="Embedded Web Browser" anchor="right" factoryClass="com.tcubedstudios.angularstudio.browsers.toolwindows.BrowserWindowFactory"/>
 
         <customScopesProvider implementation="com.tcubedstudios.angularstudio.angular.projectview.scope.AngularStudioScopesProvider" order="last"/>
+
+        <treeStructureProvider implementation="com.tcubedstudios.angularstudio.projectview.folding.FoldingTreeStructureProvider"/>
     </extensions>
 
     <actions>
